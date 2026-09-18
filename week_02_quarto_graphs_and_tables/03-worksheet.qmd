@@ -1,0 +1,31 @@
+---
+title: "Worksheet"
+author: "Rohan Alexander"
+date: "2026-09-18"
+date-format: "D MMMM, YYYY"
+format:
+  pdf:
+    fontsize: 11pt
+bibliography: references.bib
+---
+
+1. (The idea for this exercise is from Liza Bolton.) The following code makes a nice graph. Modify it to create the ugliest graph that you can.
+
+```{r}
+#| eval: false
+library(ggplot2)
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  geom_point(size = 2.5, alpha = 0.8) +
+  labs(
+    title = "Iris sepal dimensions",
+    x = "Sepal length (cm)",
+    y = "Sepal width (cm)",
+    colour = "Species"
+  ) +
+  theme_minimal()
+```
+
+2. Make a Quarto website and put it online. Create the project (`quarto create project website`), add a page with one graph of the shelter data from Week 1, set `output-dir: docs` in `_quarto.yml`, render, and push to a new GitHub repository. Under Settings, then Pages, deploy from `main` and the `/docs` folder. Write down the URL and open it on someone else's laptop.
+
+3. Make three graphs from three different Open Data Toronto datasets using ggplot2, and one table using tinytable, and add them as a page on your website.

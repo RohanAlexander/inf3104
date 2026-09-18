@@ -1,0 +1,9 @@
+---
+title: "Toronto shelters"
+---
+
+A one-page example of a Quarto website deployed with GitHub Pages, built in Week 2 of INF3104.
+
+The data are the City of Toronto's daily shelter overnight occupancy file, aggregated by date and sector with polars (`01-aggregate_shelter.py` in the course repo). The graph and table on the [Occupancy](shelter.qmd) page are made with ggplot2 and tinytable and are regenerated every time the site renders.
+
+To make your own: copy this folder, change the title in `_quarto.yml`, run `quarto render`, push, and turn on GitHub Pages from the `docs/` folder.

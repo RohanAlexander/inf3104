@@ -1,0 +1,9 @@
+[project]
+name = "week-2"
+version = "0.1.0"
+description = "Week 2: shelter data aggregation for the Quarto demonstration"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "polars>=1.33.0",
+]

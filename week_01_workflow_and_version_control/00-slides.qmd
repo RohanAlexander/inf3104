@@ -1,0 +1,179 @@
+---
+title: "Workflow and version control"
+author: "Rohan Alexander"
+date: "2026-09-11"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  revealjs:
+    slide-number: "c/t"
+    show-slide-number: all
+---
+
+# Preliminary
+
+## Preliminary
+
+- Introductions:
+    1. Name?
+    2. Degree?
+    3. What you want to get out of this course?
+    4. What you want to do next year?
+- Course repo and syllabus: https://github.com/RohanAlexander/inf3104
+- Questions?
+
+# Workflow
+
+## What is statistical workflow?
+
+- Definition: The steps that we go through when trying to use data to learn about the world.
+- Aim: Want a process that is robust and rigorous end-to-end, not just in the statistical analysis part. This will enable transparent, efficient, and trustworthy research.
+
+::: {.notes}
+- Tiffany Timbers and co-authors define data science as "The study, development and practice of reproducible and auditable processes to obtain insight from data."
+- I say that data science is the process of developing and applying a principled, tested, reproducible, end-to-end workflow that focuses on quantitative measures in and of themselves, and as a foundation to explore questions. 
+- Other authors have similar definitions. The point is that we want to use data to learn something.
+- Statistics, which you've hopefully taken a course or two in, is one aspect of that. Modelling has very rigorous approaches once we have a dataset. Experimental design has very rigorous approach for how we should get data. etc etc etc. 
+- Workflow attempts to put this all together, including developing research questions, relating our results to theory. And filling in all the gaps in the process that we might otherwise paper over.
+:::
+
+## Why is it important that we think seriously about workflows?
+
+- Our conclusions will only be as strong as the weakest part of our workflow.
+
+
+::: {.notes}
+- Errors in linking our analysis with the question we are asking will mean our analysis does not answer the question.
+- Not thinking about data before we collect it could mean wasted time and money.
+- Mistakenly ignoring or including variables in our analysis could mean incorrect conclusions.
+:::
+
+## Example: Cultural evolution
+
+@Deffner2024 outline a computational workflow for bridging theory and data in cultural evolution research. 
+
+![Figure 1 from @Deffner2024 illustrating a computational workflow for cultural evolution.](img/deffner_workflow.png)
+
+::: {.notes}
+In this example of a computational workflow, we start on the left with a generative model.
+
+- A generative model represents causal assumptions about the (latent) processes generating the observed data.
+- Generative models are concrete instantiations of theory, varying in their explanatory detail. And they provide synthetic data that can be used to validate later statistical and computational choices.
+- DAGs can be considered the simplest form of generative models. They are static representations of dynamic systems at equilibrium and abstractly describe how variables change as a function of other variables. This lack of specificity can be a strength, because the implications we deduce from DAGs consequently do not depend on detailed assumptions, and communication of important structural assumptions is easy with details omitted.
+- No one-size-fits-all solution exists and the appropriate detail of a generative model depends on the explanatory goal and the state of our theoretical understanding. Studying the same phenomena at different levels of abstraction provides its own benefits.
+- Moving to the second element: the estimand. Many papers connect theory and data by means of story-telling; story-telling does not formally define a target of inference (i.e., an estimand) and bases its conclusions on statistical estimators that are only metaphorically related to theoretical constructs. The starting point for any empirical analysis that aims to logically connect theory and data is to define the estimand within the context of the generative model. The estimand is the specific object of inference, representing the goal of our analysis and the quantity we aim to estimate. For example, the estimand might be the effect of migration on cultural diversity for a given level of conformity in our study population, with formal definitions of diversity and conformity in a specific demographic context. Once determined, we can select appropriate control variables for inferential (statistical) models and determine identifiability, i.e., whether the effect of interest can be estimated at all with the data at hand. 
+- The estimand creates a direct, logical connection between the generative and inferential models and typically also includes the target population, providing a link back to the real world. Being specific about the estimand tells us which variables are necessary, and which must be ignored, for proper identification.
+- Using the generative model to simulate synthetic data is essential to understanding the inferential limits of a potential dataset. A nightmare scenario is to invest considerable effort and funds into collecting data that have no hope of answering the research question, as data can often be too sparse and noisy. 
+- Moving to the third aspect, the inferential model, once the empirical sample is collected, we can set up an inferential model and use one or more statistical estimators (e.g., a Bayesian network) and algorithms (optimization, MCMC, ABC) to derive estimates for our target of analysis. Much has been written about the derivation and construction of estimators and target estimates. 
+- Statistical estimators provide us with model coefficients, but reporting and interpreting raw statistical estimates including their associated uncertainty intervals, P-values, or Bayes factors is only an intermediate step in empirical analyses. Parameter estimates themselves are hard to interpret (especially in non-Gaussian models and models with interaction terms) and sizable differences on the parameter (e.g., logit) scale may correspond to negligible changes on the outcome (e.g., probability) scale. Therefore, answering research questions in the context of the target population often requires additional postprocessing of model estimates. First, to compute causal effects, we need to project our estimates to the outcome scale and to the relevant target population and potentially average (or “marginalize”) over other relevant variables jointly causing the outcome (46, 47). Second, using the assumptions embodied in the generative model in combination with data from a separate target population, we can compute predictions or generalizations beyond the study sample (43). As comparisons between populations are implicit exercises in generalization as well, this procedure also allows researchers to compare societies on an equal footing. Third, using the generative model, researchers can make principled counterfactual inferences about “what would have been” under different cultural or demographic circumstances. For example, we could estimate how cultural diversity in a specific population would change if the level of conformity would have been slightly higher than it is in reality.
+- Finally, researchers can now loop back to theory and iteratively update the generative model based on comparisons between computed effects, model predictions, and posterior simulations. Insights about inferential limits and potentials can inform future research design and data collection and, following many iterations of this process, improve our understanding of the processes generating the observed cultural dynamics.
+:::
+
+## Stages [@Alexander2023]
+
+1. Plan and sketch an endpoint.
+2. Simulate and consider that simulated data.
+3. Acquire and prepare the actual data.
+4. Explore and understand the actual data.
+5. Share what was done and what was found.
+
+*Discussion: What is missing here?*
+
+::: {.notes}
+- We begin by planning and sketching an endpoint because this ensures that we think carefully about where we want to go. It forces us to deeply consider our situation, acts to keep us focused and efficient, and helps reduce scope creep. In Alice’s Adventures in Wonderland by Lewis Carroll, Alice asks the Cheshire Cat which way she should go. The Cheshire Cat replies by asking where Alice would like to go. And when Alice replies that she does not mind, so long as she gets somewhere, the Cheshire Cat says then the direction does not matter because one will always get somewhere if one “walks long enough”. The issue, in our case, is that we typically cannot afford to walk aimlessly for long. While it may be that the endpoint needs to change, it is important that this is a deliberate, reasoned decision. And that is only possible given an initial objective. There is no need to spend too much time on this to get much value from it. Often ten minutes with paper and pen are enough.
+- The next step is to simulate data, because that forces us into the details. It helps with cleaning and preparing the dataset because it focuses us on the classes in the dataset and the distribution of the values that we expect. For instance, if we were interested in the effect of age-groups on political preferences, then we may expect that our age-group variable would be a factor, with four possible values: “18-29”, “30-44”, “45-59”, “60+”. The process of simulation provides us with clear features that our real dataset should satisfy. We could use these features to define tests that would guide our data cleaning and preparation. For instance, we could check our real dataset for age-groups that are not one of those four values. When those tests pass, we could be confident that our age-group variable only contains values that we expect.
+- Simulating data is also important when we turn to statistical modeling. When we are at that stage, we are concerned with whether the model reflects what is in the dataset. The issue is that if we go straight to modeling the real dataset, then we do not know whether we have a problem with our model. We initially simulate data so that we precisely know the underlying data generation process. We then apply the model to the simulated dataset. If we get out what we put in, then we know that our model is performing appropriately, and can turn to the real dataset. Without that initial application to simulated data, it would be more difficult to have confidence in our model.
+- Acquiring and preparing the data that we are interested in is an often-overlooked stage of the workflow. This is surprising because it can be one of the most difficult stages and requires many decisions to be made. It is increasingly the subject of research, and it has been found that decisions made during this stage can affect statistical results.
+- After we have a dataset, we then want to explore and understand certain relationships in that dataset. We typically begin the process with descriptive statistics and then move to statistical models. The use of statistical models to understand the implications of our data is not free of bias, nor are they “truth”; they do what we tell them to do. When telling stories with data, statistical models are tools and approaches that we use to explore our dataset, in the same way that we may use graphs and tables. They are not something that will provide us with a definitive result but will enable us to understand the dataset more clearly in a particular way.
+- By the time we get to this step in the workflow, to a large extent, the model will reflect the decisions that were made in earlier stages, especially acquisition and cleaning, as much as it reflects any type of underlying data generating process. Sophisticated modelers know that their statistical models are like the bit of the iceberg above the surface: they build on, and are only possible due to, the majority that is underneath, in this case, the data. But when an expert at the whole data science workflow uses modeling, they recognize that the results that are obtained are additionally due to choices about whose data matters, decisions about how to measure and record the data, and other aspects that reflect the world as it is, well before the data are available to their specific workflow.
+- Finally, we must share what we did and what we found, at as high a fidelity as is possible. Talking about knowledge that only you have does not make you knowledgeable, and that includes knowledge that only “past you” has. When communicating, we need to be clear about the decisions that we made, why we made them, our findings, and the weaknesses of our approach. We are aiming to uncover something important so we should write down everything in the first instance, although this written communication may be supplemented with other forms of communication later. There are so many decisions that we need to make in this workflow that we want to be sure that we are open about the entire thing—start to finish. This means much more than just the statistical modeling and creation of the graphs and tables, but everything. Without this, stories based on data lack credibility.
+:::
+
+## Stages [@Harrell2025]
+
+- Report formatting
+- Data import
+- Data overview
+- Data processing
+- Descriptive statistics (univariate or simple stratification)
+- Analysis (stay close to data)
+- Caching (parallel computing, simulation)
+
+*Discussion: What is missing here?*
+
+# Version control
+
+(Draws on @Alexander2023 and @Timbers2024)
+
+
+## What is the problem?
+
+- Rather than "first_go.py", "first_go-fixed.py", "first_go-fixed-with-mons-edits.py". But this soon becomes cumbersome. 
+- One often soon turns to dates, for instance: "2022-01-01-analysis.py", "2022-01-02-analysis.py", "2022-01-03-analysis.py", etc. 
+- While this keeps a record, it can be difficult to search when we need to go back, because it is hard to remember the date some change was made. 
+- In any case, it quickly gets unwieldy for a project that is being regularly worked on.
+
+## Why is it important that we think seriously about version control?
+
+- enhancing the reproducibility of work by making it easier to share code and data;
+- making it easier to share work;
+- improving workflow by encouraging systematic approaches; and
+- making it easier to work in teams.
+
+## What is the solution?
+
+- Instead of this, we use Git so that we can have one version of the file. 
+- Git keeps a record of the changes to that file, and a snapshot of that file at a given point in time. 
+- We determine when Git takes that snapshot. We additionally include a message saying what changed between this snapshot and the last. In that way, there is only ever one version of the file, and the history can be more easily searched.
+- One of the initial challenging aspects of Git is the terminology. Folders are called "repos". Creating a snapshot is called a "commit". 
+
+## A tale of two computers
+
+- `git clone <some URL>`: Get a repo from the GitHub cloud to your local computer e.g. `git clone https://github.com/RohanAlexander/STA4101`
+- `git pull`: Get the latest from GitHub onto your local computer.
+- `git status`: Look at what is going on.
+- `git add .`: Add all the files (alternative is `git add <some file>`) that have changed locally.
+- `git commit -m "Commit message"`: Explain what has changed locally.
+- `git push`: Make the change on the cloud.
+
+::: {.notes}
+- When using GitHub we want to distinguish between two computers: our local computer and the GitHub cloud computer.
+:::
+
+## .gitignore file
+
+- Sometimes there are files that we do not want to push to GitHub. We create a `.gitignore` file to tell GitHub to ignore them. 
+- If you have a mac, make sure you add `.DS_Store` to the `.gitignore`.
+
+## Git branches
+
+![Example of Git branching from @Timbers2024.](img/git-branch-diagrams.png)
+
+::: {.notes}
+- Git branches allow you to make changes in a contained way. If you don't like the way that something turns out then it's not a big deal to start again from the main branch. 
+:::
+
+## Pull requests
+
+![Screenshot GitHub PR screen.](img/git-pr-1.png)
+
+::: {.notes}
+- Pull requests (PRs) are a way to merge the code from your branch into the main branch. First you want to make sure that you've pushed everything that you changed. After that you can make a PR.
+:::
+
+## Issues
+
+- GitHub Issues can be used to leave feedback or note ideas.
+
+![Screenshot of GitHub highlighting GitHub Issues.](img/github_issues.png)
+
+## Principles
+
+- Commit early and often; whenever there is coherent block of work. Maybe once or twice a day.
+- Try to work on a branch rather than main.
+- Make a PR to merge that branch into main when you are ready for review. Maybe once a day.
+- Try not to accept your own PR - that should be done by another person.
+
+## References
+
+

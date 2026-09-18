@@ -1,0 +1,182 @@
+---
+title: "Demonstration: Quarto, graphs, tables, and websites"
+author: "Rohan Alexander"
+date: "2026-09-18"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+# What Quarto is
+
+## What even is Quarto?
+
+### What, seriously, is Quarto?
+
+Quarto turns a plain-text file with a `.qmd` extension into a PDF, a Word document, a slide deck, or a website. The file has three kinds of content: a YAML header between `---` lines that says what to produce; Markdown prose; and code chunks that run when the file renders, so the numbers, graphs, and tables in the output come from the data every time. This document is a `.qmd`; open `02-demo.qmd` next to the PDF and compare.
+
+A paper where the figures were pasted in by hand cannot be checked and cannot be updated when the data change. A Quarto paper can be rendered by anyone with the repo.
+
+# The workflow from last week
+
+## Step 1: Python makes the data
+
+`aggregate_shelter.py` downloads the City of Toronto's daily shelter occupancy file (the Week 1 data), keeps the columns we need, and aggregates to one row per date and sector. Run it once:
+
+```bash
+uv run aggregate_shelter.py
+```
+
+It writes `data/shelter_daily.parquet`. Parquet rather than CSV!
+
+## Step 2: R reads it
+
+This chunk runs when this document renders. The first one reads the Parquet file with the `arrow` package.
+
+```{r}
+#| message: false
+#| warning: false
+
+library(arrow)
+library(dplyr)
+library(ggplot2)
+library(tinytable)
+
+daily <- read_parquet("data/shelter_daily.parquet")
+
+glimpse(daily)
+```
+
+## Step 3: a graph
+
+
+```{r}
+#| label: fig-users
+#| fig-cap: "People in Toronto's shelter system each night in 2026, by sector. Data from Open Data Toronto."
+#| fig-width: 8
+#| fig-height: 4
+
+daily |>
+  ggplot(aes(x = date, y = service_users, colour = sector)) +
+  geom_line() +
+  labs(x = "Date", y = "People", colour = "Sector") +
+  theme_classic()
+```
+
+@fig-users is a cross-reference: the `label` on the chunk starts with `fig-`, so Quarto numbers the figure and the reference updates itself if figures move. Three things: the graph has labelled axes with units, the legend is named, and the ordering of the lines carries information.
+
+## Step 4: a table
+
+```{r}
+#| label: tbl-latest
+#| tbl-cap: "Shelter occupancy on the most recent night in the data, by sector."
+
+latest <- 
+  daily |>
+  filter(date == max(date)) |>
+  mutate(
+    beds = if_else(capacity_beds > 0, occupied_beds / capacity_beds, NA),
+    rooms = if_else(capacity_rooms > 0, occupied_rooms / capacity_rooms, NA)
+  ) |>
+  select(
+    Sector = sector, People = service_users,
+    `Bed occupancy` = beds, `Room occupancy` = rooms
+  )
+
+tt(latest, digits = 3) |>
+  format_tt(
+    j = c("Bed occupancy", "Room occupancy"),
+    fn = scales::label_percent(accuracy = 0.1)
+  ) |>
+  format_tt(escape = TRUE)
+```
+
+@tbl-latest is the same idea for a table. The table has a caption that says what the rows are and when the data are from. In terms of measurement, notice that Families may be room-based and so could undercount.
+
+## Step 5: Citations
+
+Citations come from `references.bib` and the `bibliography` line in the header. Writing `@healy2019` gives @healy2019, and `[@healy2019]` gives a parenthetical [@healy2019]. The reference list is added at the end automatically.
+
+# Rendering
+
+From the terminal, in the folder that has the file:
+
+```bash
+quarto render 02-demo.qmd
+```
+
+`format: pdf` in the header makes a PDF (this needs a LaTeX installation; `quarto install tinytex` gets one). Change it to `format: html` for a web page or `format: revealjs` for slides; nothing else in the file changes. In VS Code, the Quarto extension gives you a Render button and a preview.
+
+# Websites
+
+A Quarto website is a folder with a `_quarto.yml` and some `.qmd` pages. `website_example/` in this week's folder is a working one; copy it. The three files that matter:
+
+`_quarto.yml`:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Toronto shelters"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: shelter.qmd
+        text: Occupancy
+
+format:
+  html:
+    theme: cosmo
+```
+
+`index.qmd` is the home page, `shelter.qmd` is a page with the graph and table above. Rendering the whole site:
+
+```bash
+quarto render
+```
+
+puts the finished HTML in `docs/`. That folder name is the trick for GitHub Pages: push the repo to GitHub, then under Settings, Pages, choose "Deploy from a branch", branch `main`, folder `/docs`. A minute later the site is at `https://<username>.github.io/<repo>/`. Every time you render and push, the site updates. Commit `docs/`; it is the product.
+
+# Working in groups: pull requests and conflicts
+
+Next week's classic-paper presenters need to get their slides into the class repo, and the Part 2 teams will share one repo for a month. The mechanism for both is the pull request.
+
+The loop, for a repo you do not own:
+
+```bash
+# once: fork on GitHub, then
+git clone https://github.com/<you>/<repo>.git
+cd <repo>
+git checkout -b week_03_donoho_2017      # a branch for your change
+# ... add your files ...
+git add .
+git commit -m "Add slides on Donoho (2017)"
+git push -u origin week_03_donoho_2017
+```
+
+Then on GitHub, "Compare & pull request". The PR is where the review happens: someone else reads the diff, leaves comments on lines, and approves or asks for changes. Only after that does it get merged. Nobody pushes to `main` directly.
+
+A conflict happens when two people change the same lines and the second one to merge has to choose. Git marks the file like this:
+
+```
+<<<<<<< HEAD
+- Week 3: Donoho (2017)
+=======
+- Week 3: Tukey (1977)
+>>>>>>> week_03_donoho_2017
+```
+
+Open the file, keep the version you want, delete the three marker lines, then `git add` and `git commit`. That is all a conflict is. The Timbers reading has the longer version; the live demonstration will make one on purpose with two branches that edit the same line of a README.
+
+Two rules that prevent most conflicts: pull before you start (`git pull`), and keep PRs small and about one thing.
+
+# What to do in the worksheet
+
+Question 3 builds a website like `website_example/` and puts it on GitHub Pages. Question 2 is your first PR to the class repo. Question 4 is three graphs and a table of your own, on the website. If you finish, make a conflict with your neighbour and fix it.
+
+\newpage
+
+# References

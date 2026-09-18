@@ -1,0 +1,55 @@
+---
+title: "Assignment 1: GitHub Actions"
+author: "Rohan Alexander"
+date: "2026-09-11"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+Due: before class in Week 2.
+
+# What you will do
+
+Set up a GitHub repository that collects some data on a schedule, without you doing anything, using GitHub Actions. By the due date the repo should have run on its own at least twice and the data it collected should be committed in the repo.
+
+Pick one of the two starting points below. Both use `uv` to manage Python, so the workflow file is nearly the same; the only difference is whether you need credentials.
+
+# Option A: Bluesky (needs a Bluesky account)
+
+Start from the `bluesky_example` folder of https://github.com/RohanAlexander/STA4101. It searches Bluesky for posts mentioning "Canada" once a day and appends them to a CSV.
+
+1. Fork the repo.
+2. Add your Bluesky handle and an app password as repository secrets (`BLUESKY_USERNAME` and `BLUESKY_PASSWORD`). Use an app password from Bluesky's settings, not your real password.
+3. Under Settings > Actions > General, give workflows read and write permissions.
+4. Change the search term in `scrape_bluesky.py` to something you care about.
+5. Change the schedule in `.github/workflows/daily_scrape.yml`.
+6. Trigger it manually once from the Actions tab, and check that a CSV appears in the repo.
+
+# Option B: Toronto shelter occupancy (no account needed)
+
+Start from https://github.com/RohanAlexander/shelter_actions. It downloads the City of Toronto's daily shelter occupancy data once a day and saves it as parquet.
+
+1. Fork the repo.
+2. Under Settings > Actions > General, give workflows read and write permissions.
+3. Change the schedule in `.github/workflows/daily_download.yml`.
+4. Change something about what is downloaded or saved: a different Open Data Toronto dataset, a subset of columns, or a summary table saved alongside the raw file.
+5. Trigger it manually once from the Actions tab, and check that the file appears in the repo.
+
+# What to submit
+
+A link to your forked repo. In the README, in a few sentences, say what the workflow collects, how often it runs, and one thing that went wrong while you set it up and how you fixed it.
+
+# Marking
+
+- The workflow has run on a schedule, not only when triggered by hand, and the collected data are committed: 50%.
+- You changed what it collects or when, and the change works: 25%.
+- README: 25%.
+
+A red X in the Actions tab is not a failure of the assignment if the README explains what happened. A green tick with no data committed is.
+
+# Reading
+
+@DeAngelis2026 describes exactly this workflow, and the problems that come up, using her collection of Bluesky posts during the 2025 federal election. Read it before you start; it will save you time.
+
+# References

@@ -1,0 +1,96 @@
+---
+title: "Worksheet"
+author: "Rohan Alexander"
+date: "2026-09-11"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+1. Write down your own (potentially idealized) statistical workflow.
+
+\newpage
+
+2. For each aspect of your workflow, rate how confident you are about your ability.
+
+\newpage
+
+3. Exchange with another member of the class. Note three aspects that you would like to borrow from theirs to improve yours.
+
+\newpage
+
+4. Pick the classic paper that you would like to present (the list is in the README of the class repo). Make a GitHub account if needed, then branch and make a PR to the class repo - https://github.com/RohanAlexander/inf3104 - adding a folder for your presentation inside that week's folder (nicely formatted e.g. `week_05_measurement_censuses_and_sampling/presentation`), with a README file that contains your name and the paper.
+
+\newpage
+
+**Questions 5 to 10 are all from @Timbers2024**
+
+5. Which of these is untrue about the Git and GitHub version control software?
+	a. Allows you to view and/or retrieve older snapshots of the files and directories in a project.
+	b. Automatically snapshots your work every 2 minutes.
+	c. Provides transparency on who made what changes to files and directories in a document.
+	d. Can act as a way to back-up your work.
+6. GitHub is the software you use locally on your computer (i.e., your laptop) to commit changes to the version control history. True or False?
+	a. True
+	b. False
+	c. Neither true nor false.
+7. You changed two files (notes.txt and eda.ipynb) but you only want to commit changes to one of them (eda.ipynb) to the version control history. Which Git command allows you to specify this?
+	a. Add
+	b. Commit
+	c. Push
+	d. Pull
+8. At a minimum, how often should you push your work to GitHub?
+	a. Every 5 min.
+	b. Every 30 min.
+	c. At the end of every work session.
+	d. Once a week.
+9. You try to push your most recent commit from your local version control repository to your remote repository on GitHub and it fails because Git says the remote contains work that you do not have locally. What should you do next?
+	a. Commit the changes you made recently in your working directory.
+	b. Force push your changes.
+	c. Pull the changes from the remote repository that you do not have locally.
+10. You pull changes that exist in your remote version control repository on GitHub that you do not have in your local version control repository, and you get the message
+
+> Auto-merging in <FILENAME> CONFLICT (content):
+> Merge conflict in <FILENAME> Automatic merge failed
+> fix conflicts and then commit the result.
+
+What do you need to do?
+
+a. Push the changes from the local repository that you do not have remotely.
+b. Force pull the changes.
+c. Manually open the file with the conflict and edit it to have the desired version of the changes, as well as remove the special Git syntax used to identify the merge conflict.
+
+\newpage
+
+**GitHub Actions**
+
+11. A GitHub Actions workflow runs:
+	a. On your laptop, whenever you push.
+	b. On a computer that GitHub provides, when a trigger you specify happens.
+	c. On the computer of whoever last committed.
+12. Look at the workflow file in the example repo (`.github/workflows/daily_scrape.yml`). Write down, in one line each, what the `on:`, `jobs:`, and `steps:` sections do.
+
+\newpage
+
+13. The workflow installs `uv` and then runs `uv sync` before running the script. Why does it need to do this, given the script already runs on your laptop?
+
+14. The Bluesky example needs a username and password, and they are not in the repo. Where are they, and why does it matter that they are not in the repo?
+
+\newpage
+
+**Homework**
+
+- Download and install uv: https://docs.astral.sh/uv/getting-started/installation/.
+- Download and install VS Code.
+- Download and install Quarto.
+- Add the Quarto extension to VS Code: https://marketplace.visualstudio.com/items?itemName=quarto.quarto.
+- Use uv to install Python: https://docs.astral.sh/uv/guides/install-python/.
+- Use uv to run a script: https://docs.astral.sh/uv/guides/scripts/.
+- Connect your GitHub account to VS Code.
+- Fork the example repo for the assignment and get the workflow to run once (the "Run workflow" button under the Actions tab).
+
+Please do this today and arrange a time to meet me later this week if you have issues.
+
+\newpage
+
+# References

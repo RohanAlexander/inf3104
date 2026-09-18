@@ -1,0 +1,17 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Toronto shelters"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: shelter.qmd
+        text: Occupancy
+
+format:
+  html:
+    theme: cosmo
+    toc: true

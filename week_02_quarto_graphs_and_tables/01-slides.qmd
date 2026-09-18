@@ -1,0 +1,461 @@
+---
+title: "More workflow"
+author: "Rohan Alexander"
+date: "2026-09-18"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+engine: markdown
+format:
+  revealjs:
+    slide-number: "c/t"
+    show-slide-number: all
+---
+
+# Quarto, websites, and PRs
+
+## This week
+
+- Quarto: one plain-text file, rendered to PDF, slides, or a website.
+- Graphs with `ggplot2` and tables with `tinytable`, from a Parquet file that Python made.
+- A website on GitHub Pages.
+- Pull requests, reviews, and conflicts.
+
+::: {.notes}
+- Two and a half hours of doing; 30 min Q&A.
+- The demonstration file is `02-demo.qmd`; the website is `website_example/`.
+:::
+
+## A `.qmd` file has three parts
+
+````markdown
+---
+title: "Shelter occupancy"
+format: pdf
+bibliography: references.bib
+engine: markdown
+---
+
+Prose in Markdown, with a citation [@healy2019]
+and a cross-reference to @fig-users.
+
+```{r}
+#| label: fig-users
+#| fig-cap: "People in shelters each night"
+ggplot(daily, aes(date, service_users)) + geom_line()
+```
+````
+
+::: {.notes}
+- Header says what to make. Prose is Markdown. Chunks run at render time.
+- Change `pdf` to `html` or `revealjs` and nothing else changes.
+:::
+
+## Why this matters for the Donaldson paper
+
+- Everything (tables, graphs) in the PDF comes from code that ran on the data 😎
+- When we change the data we can render it again (or have a GitHub Actions to do that automatically), and then everything updates 😎
+- A reader with the repo can check any figure 😎
+- Pasted-in figures cannot be checked and go stale 😢
+
+## You can use both Python and R
+
+```
+aggregate_shelter.py  --polars-->  data/shelter_daily.parquet  --arrow-->  02-demo.qmd (R)
+```
+
+- For instance, it's common to use Python for scraping or interacting with an API: download, clean, aggregate, write Parquet.
+- Then you could use R to make graphs and tables: `arrow::read_parquet()`, `ggplot2`, `tinytable`.
+- Parquet keeps the types, so a date is still a date!
+
+## `ggplot2` hello world!
+
+```r
+daily |>
+  ggplot(aes(x = date, y = service_users, colour = sector)) +
+  geom_line() +
+  labs(x = "Date", y = "People", colour = "Sector") +
+  theme_minimal()
+```
+
+- Data, then aesthetics (`aes`), then a geometry, then labels
+- We use a "grammar" of graphics.
+
+## `tinytable` hello world!
+
+```r
+latest |>
+  tt(digits = 3) |>
+  format_tt(j = "Occupancy", fn = scales::label_percent(0.1)) |>
+  format_tt(escape = TRUE)
+```
+
+- Caption and cross-reference come from the chunk options `label: tbl-...` and `tbl-cap`.
+
+## A website is just a type of doc
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "Toronto shelters"
+  navbar:
+    left:
+      - href: index.qmd
+      - href: shelter.qmd
+```
+
+- `quarto render` builds every page into `docs/`.
+- GitHub, Settings, Pages, deploy from `main`, folder `/docs`.
+- `output-dir: docs` makes it easier to deploy from GitHub Pages.
+
+## Pull requests
+
+```bash
+git checkout -b week_03_donoho_2017
+git add . && git commit -m "Add slides on Donoho (2017)"
+git push -u origin week_03_donoho_2017
+```
+
+- Then "Compare & pull request" on GitHub
+- Someone else reads the diff and comments before it merges
+- Nobody pushes to `main`
+
+## Conflicts
+
+```
+<<<<<<< HEAD
+- Week 3: Donoho (2017)
+=======
+- Week 3: Tukey (1977)
+>>>>>>> week_03_donoho_2017
+```
+
+- Two people changed the same lines; Git asks you to choose
+- Keep what you want, delete the three marker lines, `git add`, `git commit`
+- Prevention: `git pull` before you start, and small PRs
+
+# Overview
+
+## Summary
+
+- Graphs enable a familiarity with our data that is hard to get from any other method. 
+- We need to be comfortable with a variety of graph types, including: 
+  - bar charts; 
+  - scatterplots; 
+  - line plots; and 
+  - histograms. 
+
+## Why do we graph?
+
+> Data display is critical to data analysis. Graphs allow us to explore data to see overall patterns and to see detailed behavior; no other approach can compete in revealing the structure of data so thoroughly. Graphs allow us to view complex mathematical models fitted to data, and they allow us to assess the validity of such models.
+
+@cleveland1994 [p. 5]
+
+::: {.notes}
+- Read out the quote.
+- For me, it is a way of seeing if the author has understood their dataset.
+:::
+
+## Realizing the potential of data visualization requires methods and basic principles
+
+![Figure 1.1 from @cleveland1994 [p. 4].](img/sunspots_1.png)
+
+::: {.notes}
+- This panel graphs the yearly sunspot numbers from 1749 to 1924. The dominant frequency component of variation in the data is the cycles with periods of about 11 years. 
+- The graph has nice x and y axis labels. There is nothing that is distracting.
+- The graph is fine.
+- From this graph we can clearly see that there are sunspot cycles.
+- But an important property of them is not.
+- And this property is essential when developing theories of solar physics.
+- The problem is the shape - or aspect ratio - of the graph. We used a square and it misleads.
+:::
+
+## But mostly involves thinking (hard) about the data, what we want to communicate, and to whom
+
+![Figure 1.1 from @cleveland1994 [p. 4].](img/sunspots_2.png)
+
+::: {.notes}
+- Changing this, in the second panel, to a narrow rectangle, reveals the important property. 
+- The cycles typically rise more rapidly than they fall. This behaviour is more pronounced for cycles with high peaks, is less pronounced for those with medium peaks and disappears for those cycles with very lowest peaks.
+- If an undergraduate (or student) gives you the square graph and asks you what **exactly** is wrong with it, you'd be hard-pressed to answer. You can only answer with the benefit of expertise and of having understood the dataset yourself.
+- This makes it difficult to objectively provide a list of instructions for making effective graphs.
+:::
+
+## Graphs preserve data
+
+- Graphs allow us to explore all the information in the data.
+- The most important objective of a graph is to convey as much of the actual data, and its context, as possible.
+
+![](img/datasauRus_1.png){width=60%}
+
+*Discussion: What do you think about each dataset?*
+
+::: {.notes}
+- Many techniques of data analysis have data reduction as their first step. For instance, take all the data and reduce them to means, standard deviations, correlation coefficients, variance components, or t-tests.
+- Then inference is based on this very limited collection of values.
+- Using only numerical reduction methods in data analyses is far too limiting. We cannot expect a small number of numerical values to consistently convey the wealth of information that exists in the data. 
+:::
+
+## Graphs preserve data
+### They illustrate data in a way that other methods struggle to
+
+![](img/datasauRus_2.png)
+
+::: {.notes}
+- The most important objective of a graph is to convey as much of the actual data, and its context, as possible. In a way, graphing is an information encoding process where we construct a deliberate representation to convey information to our audience. The audience must decode that representation. The success of our graph depends on how much information is lost in this process so the decoding is a critical aspect (Cleveland [1985] 1994, 221). This means that we must focus on creating effective graphs that are suitable for our specific audience.
+:::
+
+
+## Anscombe's Quartet
+### Mean and standard deviation
+
+![Mean and standard deviation for Anscombe's quartet.](img/anscombe_1.png){width=60%}
+
+::: {.notes}
+- 
+:::
+
+## Anscombe's Quartet
+### Graph
+
+![ Recreation of Anscombe's Quartet.](img/anscombe_2.png)
+
+::: {.notes}
+- 
+:::
+
+## What do we graph?
+
+- Every variable of interest should be graphed in a way that every observation can be identified.
+- Small datasets can be put into tables; large datasets can be sampled from.
+
+*Discussion: What are some caveats from your own research?*
+
+::: {.notes}
+- 
+:::
+
+## Bar chart
+
+- We typically use a bar chart when we have a categorical variable that we want to focus on. 
+
+![Distribution of age-groups in the 1997-2001 British Election Panel Study.](img/bar_chart_1.png)
+
+*Discussion: How might this affect our analysis?*
+
+::: {.notes}
+- We now turn to a collection of graphs that we use in various circumstances.
+- The first is a bar chart. We use these when we have categorical variables that we want to focus on. 
+- In this case we are interested in the distribution of ages from the British Election Panel study. 
+- Looking at the age-groups on the x-axis we can see that we have a large number in the 35-49 age group, and also large numbers in the 50-64 and 65-79 age groups. We have far fewer responses in the 80-99 and the under 35 age groups.
+:::
+
+
+## Bar chart
+### With facet and color
+
+- We can use facets and color to focus on more than one variable.
+
+![Distribution of age-group by gender, and vote preference, in the 1997-2001 British Election Panel Study.](img/bar_chart_2.png)
+
+::: {.notes}
+- 
+:::
+
+## Scatterplots
+
+- Scatterplots can be used to show the relationship between two numeric or continuous variables.
+
+![Relationship between inflation and GDP growth for Australia, Ethiopia, India, and the United States.](img/scatterplot.png)
+
+::: {.notes}
+- A scatterplot may not always be the best choice, but it is rarely a bad one [@weissgerber2015beyond]. 
+- Some consider it the most versatile and useful graph option [@historyofdataviz, p. 121]. 
+- I am a particular fan of scatterplots for summarising model outputs. For instance, comparing estimated with actual predictions or actual predictions with difference.
+:::
+
+## Line plots
+
+- We can use a line plot when we have variables that should be joined together, for instance, an economic time series.
+
+![United States GDP growth (1961-2020)](img/lineplot.png)
+
+::: {.notes}
+- Particular attention is needed to whether the points should be joined or not.
+:::
+
+
+## Histograms
+
+- A histogram is useful to show the shape of the distribution of a continuous variable.
+
+![Distribution of GDP growth in Ethiopia (1960-2020)](img/histogram_1.png)
+
+::: {.notes}
+- The full range of the data values is split into intervals called “bins” and the histogram counts how many observations fall into which bin.
+:::
+
+
+
+## Histograms
+### Bins
+
+![Distribution of GDP growth in Ethiopia (1960-2020)](img/histogram_2.png)
+
+*Discussion: What is the optimal number of bins?*
+
+::: {.notes}
+- Histograms can be thought of as locally averaging data, and the number of bins affects how much of this occurs. 
+- When there are only two bins then there is considerable smoothing, but we lose a lot of accuracy. Too few bins results in more bias, while too many bins results in more variance [@wasserman, p. 303]. 
+- Our decision as to the number of bins, or their width, is concerned with trying to balance bias and variance. 
+- This will depend on a variety of concerns including the subject matter and the goal  @cleveland1994, [p. 135]. 
+- This is one of the reasons that @Denby2009 consider histograms to be especially valuable as exploratory tools.
+:::
+
+
+
+## (Don't use) Boxplots
+
+- Boxplots alone are rarely the best choice because they hide the distribution of data, rather than show it.
+
+![Data drawn from beta distributions with different parameters](img/boxplot.png)
+
+*Discussion: When might boxplots be appropriate?*
+
+::: {.notes}
+- A boxplot typically shows five aspects: 1) the median, 2) the 25th, and 3) 75th percentiles. The fourth and fifth elements differ depending on specifics.
+- One reason for using graphs is that they help us understand and embrace how complex our data are, rather than trying to hide and smooth it away [@armstrongembracecomplexity]. One appropriate use case for boxplots is to compare the summary statistics of many variables at once, such as in @Bethlehem2022. But boxplots alone are rarely the best choice because they hide the distribution of data, rather than show it. The same boxplot can apply to very different distributions. 
+- To see this, consider some simulated data from the beta distribution of two types. The first contains draws from two beta distributions: one that is right skewed and another that is left skewed. The second contains draws from a beta distribution with no skew.
+:::
+
+
+# Implementation
+
+This section's slides follow @healy2019, Chapter 1. All content and figures are from @healy2019.
+
+## Some data visualizations are better than others
+
+- Undergraduate: What **exactly** do I need in my graph for 10/10?
+- Me: It depends.
+
+::: notes
+- The process of making a really good or really useful graph cannot be boiled down to a list of simple rules to be followed without exception in all circumstances. 
+- The graphs you make are meant to be looked at by someone. 
+- The effectiveness of any particular graph is not just a matter of how it looks in the abstract, but also a question of who is looking at it, and why.
+- Some data visualizations are better than others. 
+- While it is tempting to simply start laying down the law about what works and what doesn't, the process of making a really good or really useful graph cannot be boiled down to a list of simple rules to be followed without exception in all circumstances. 
+- The graphs you make are meant to be looked at by someone. 
+- The effectiveness of any particular graph is not just a matter of how it looks in the abstract, but also a question of who is looking at it, and why. 
+- An image intended for an audience of experts reading a professional journal may not be readily interpretable by the general public. 
+- A quick visualization of a dataset you are currently exploring might not be of much use to your peers or your students.
+- Some graphs work well because they depend in part on some strong aesthetic judgments about what will be effective. That sort of good judgment is hard to systematize. 
+- However, data visualization is not simply a matter of competing standards of good taste. 
+:::
+
+---
+
+## What makes bad figures bad
+
+1. Bad taste: Excessive decoration, 3D effects, chart junk.
+2. Substantive issues: wrong or misleading data choices.
+3. Perceptual problems: angles, area, truncated scales.
+
+::: notes
+Bad taste isn't just about aesthetics; it actively distracts. 3D pie charts, unnecessary gradients, and heavy backgrounds make interpretation harder. Substantive errors—like comparing inappropriate groups—undermine trust. Perceptual issues are subtle: e.g., showing percentages on a truncated axis can make small differences look massive.
+:::
+
+---
+
+## Bad taste
+
+![A chart with a considerable amount of junk in it.](img/bad_taste.png)
+
+*Discussion: What is good and bad about this graph?*
+
+::: notes
+Let's start with the bad taste. This graph is both quite tasteless and has far too much going on in it, given the modest amount of information it displays. The bars are hard to read and compare. It needlessly duplicates labels and makes pointless use of three-dimensional effects, drop shadows, and other unnecessary design features.
+:::
+
+---
+
+## Bad taste
+### What to do
+
+- Maximize the "data-to-ink" ratio.
+  - clean up the typeface;
+  - remove extraneous colors and backgrounds; and 
+  - simplify, mute, or delete gridlines, superfluous axis marks, or needless keys and legends.
+- But...
+
+*Discussion: What are some exceptions?*
+
+::: notes
+
+- In practice those compositional principles have amounted to an encouragement to maximize the “data-to-ink” ratio. This is practical advice. It is not hard to jettison tasteless junk, and if we look a little harder we may find that the chart can do without other visual scaffolding as well. We can often clean up the typeface, remove extraneous colors and backgrounds, and simplify, mute, or delete gridlines, superfluous axis marks, or needless keys and legends.
+- Given all that, we might think that a solid rule of "simplify, simplify" is almost all of what we need to make sure that our charts remain junk-free, and thus effective. But unfortunately this is not the case. For one thing, somewhat annoyingly, there is evidence that highly embellished charts like Nigel Holmes's “Monstrous Costs” are often more easily recalled than their plainer alternatives [@Bateman2010]
+- Viewers do not find them more easily interpretable, but they do remember them more easily and also seem to find them more enjoyable to look at.
+- Even worse, it may be the case that graphics that really do maximize the data-to-ink ratio are harder to interpret than those that are a little more relaxed about it.
+- While chartjunk is not entirely devoid of merit, bear in mind that ease of recall is only one virtue amongst many for graphics. It is also the case that, almost by definition, it is no easier to systematize the construction of a chart like “Monstrous Costs” than it is to replicate the impact of Minard's graph of Napoleon's retreat. Indeed, the literature on chartjunk suggests that the two may have some qualities in common. To be sure, Minard's figure is admirably rich in data while Holmes's is not. But both are visually distinctive in a way that makes them memorable, both show a very substantial amount of bespoke design, and both are quite unlike most of the statistical graphs you will see, or make.
+:::
+
+---
+
+## Bad data
+
+![A crisis of faith in democracy? (New York Times.)](img/bad_data_1.png)
+
+*Discussion: What do you take away from this graph?*
+
+::: notes
+- The graph was widely circulated on social media. It is impressively well-produced. It's an elegant small-multiple that, in addition to the point ranges it identifies, also shows an error range (labeled as such for people who might not know what it is), and the story told across the panels for each country is pretty consistent.
+- The figure is a little tricky to interpret. As the x-axis label says, the underlying data are from a cross-sectional survey of people of different ages rather than a longitudinal study measuring everyone at different times. Thus, the lines do not show a trend measured each decade from the 1930s, but rather differences in the answers given by people born in different decades, all of whom were asked the question at the same time. Given that, a bar graph might have been a more appropriate to display the results.
+:::
+
+---
+
+## Bad data (cont.)
+
+![Perhaps the crisis has been overblown. (Erik Voeten.)](img/bad_data_2.png)
+
+::: notes
+- Perhaps Mounk's argument is correct. But in such cases, the question is how much we are letting the data speak to us, as opposed to arranging it to say what we already think for other reasons. importantly, as the story circulated, helped by the compelling graphic, scholars who knew the World Values Survey data underlying the graph noticed something else. 
+- The graph reads as though people were asked to say whether they thought it was essential to live in a democracy, and the results plotted show the percentage of respondents who said “Yes”, presumably in contrast to those who said “No”. But in fact the survey question asked respondents to rate the importance of living in a democracy on a ten point scale, with 1 being “Not at all Important” and 10 being “Absolutely Important”. 
+- The graph showed the difference across ages of people who had given a score of “10” only, not changes in the average score on the question. As it turns out, while there is some variation by year of birth, most people in these countries tend to rate the importance of living in a democracy very highly, even if they do not all score it as “Absolutely Important”. 
+- The change here is not due to a difference in how the y-axis is drawn. That is a common issue with graphs. In this case both the New York Times graph and Voeten's alternative have scales that cover the full range of possible values (from zero to 100% in the former case and from 1 to 10 in the latter). Rather, a different measure is being shown. We are now looking at the trend in the average score, rather than the trend for the highest possible answer. 
+- Substantively, there does still seem to be a decline in the average score by age cohort, on the order of between half a point to one and a half points on a ten point scale. It could be an early warning sign of a collapse of belief in democracy, or it could be explained by something else. It might even be reasonable to present the data in Voeten's version with the y-axis covering just the range of the decline, rather than the full zero to ten scale. But it seems fair to say that the story not have made the New York Times if the original research article had presented Voeten's version of the data, rather than the one that appeared in the newspaper.
+:::
+
+---
+
+## Bad perception
+
+![A 3-D Column Chart created in Microsoft Excel for Mac. Although it may seem hard to believe, the values shown in the bars are 1, 2, 3, and 4.)](img/bad_perception.png)
+
+*Discussion: What do you take away from this graph?*
+
+::: notes
+- Our third category of badness lives in the gap between data and aesthetics. Visualizations encode numbers in lines, shapes, and colors. That means that our interpretation of these encodings is partly conditional on how we perceive geometric shapes and relationships generally. 
+- We have known for a long time that poorly-encoded data can be misleading. Many of the instances they cite revolve around needlessly multiplying the number of dimensions shown in a plot. Using an area to represent a length, for example, can make differences between observations look larger than they are.
+- Although the most egregious abuses are less common than they once were, adding additional dimensions to plots remains a common temptation. Figure 1.10, for instance, is a 3-D bar chart made using a recent version of Microsoft Excel. 
+- Charts like this are common in business presentations and popular journalism, and are also seen in academic journal articles from time to time. Here we seek to avoid too much junk by using Excel's default settings. To be fair, the 3-D format is not Excel's default type of bar chart. 
+- As you can see from the cells shown to the left of the chart, the data we are trying to plot is not very complex. The chart even tries to help us by drawing and labeling grid lines on the y (and z) axis. And yet, the 3-D columns in combination with the default angle of view for the chart make the values as displayed differ substantially from the ones actually in the cell. 
+- Each column appears to be somewhat below its actual value. It is possible to see, if you squint with your mind's eye, how the columns would line up with the axis guidelines if your angle of view moved so that the bars head-on. But as it stands, anyone asked what values the chart shows would give the wrong answer.
+:::
+
+---
+
+## Summary
+
+- Focus on who is the audience and what message do we want them to take-away.
+- Remove "chartjunk".
+- Use facets or color for group comparisons.
+- Plot every observation of every variable.
+- Test graphs with your audience.
+
+::: notes
+- Good graphs focus on the data as a representation of the underlying data generating process. 
+- Clutter, like unnecessary gridlines or duplicate legends, can distract from thinking about that. 
+:::
+
+## References

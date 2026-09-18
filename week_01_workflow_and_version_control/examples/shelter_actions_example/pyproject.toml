@@ -1,0 +1,8 @@
+[project]
+name = "shelter-occupancy-download"
+version = "0.1.0"
+description = "Daily download of Toronto shelter occupancy data via GitHub Actions"
+requires-python = ">=3.12"
+dependencies = [
+    "polars>=1.33.0",
+]

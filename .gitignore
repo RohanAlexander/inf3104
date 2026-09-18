@@ -1,0 +1,23 @@
+# Weeks not yet released
+week_03_writing_papers/
+week_04_exam_1/
+week_05_measurement_censuses_and_sampling/
+week_06_apis_scraping_experiments_and_surveys/
+week_07_cleaning_testing_and_sharing_data/
+week_08_exam_2/
+week_09_exploring_and_modeling/
+week_12_exam_3/
+lit/
+README.html
+
+# System and editor files
+.DS_Store
+.Rhistory
+.Rproj.user/
+.quarto/
+.venv/
+__pycache__/
+*_files/
+
+# Teaching notes and quiz answer keys
+instructors/

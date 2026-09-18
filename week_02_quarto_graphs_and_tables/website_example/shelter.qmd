@@ -1,0 +1,51 @@
+---
+title: "Occupancy"
+---
+
+```{r}
+#| message: false
+#| echo: false
+library(arrow)
+library(dplyr)
+library(ggplot2)
+library(tinytable)
+
+daily <- read_parquet("data/shelter_daily.parquet")
+```
+
+```{r}
+#| label: fig-users
+#| fig-cap: "People in Toronto's shelter system each night in 2026, by sector. Data from Open Data Toronto."
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+daily |>
+  ggplot(aes(x = date, y = service_users, colour = sector)) +
+  geom_line() +
+  labs(x = "Date", y = "People", colour = "Sector") +
+  theme_minimal()
+```
+
+```{r}
+#| label: tbl-latest
+#| tbl-cap: "Shelter occupancy on the most recent night in the data, by sector."
+#| echo: false
+daily |>
+  filter(date == max(date)) |>
+  mutate(
+    beds = if_else(capacity_beds > 0, occupied_beds / capacity_beds, NA),
+    rooms = if_else(capacity_rooms > 0, occupied_rooms / capacity_rooms, NA)
+  ) |>
+  select(
+    Sector = sector, People = service_users,
+    `Bed occupancy` = beds, `Room occupancy` = rooms
+  ) |>
+  tt(digits = 3) |>
+  format_tt(
+    j = c("Bed occupancy", "Room occupancy"),
+    fn = scales::label_percent(accuracy = 0.1)
+  ) |>
+  format_tt(escape = TRUE)
+```
+
+The code is in `shelter.qmd`; set `echo: true` on the chunks to show it.

@@ -1,0 +1,58 @@
+---
+title: "Quiz 1"
+subtitle: "Week 1 readings and work: De Angelis, Bryan, Wilson et al., and the shelter data"
+author: "Rohan Alexander"
+date: "2026-09-18"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+These questions are about @DeAngelis2026, @Bryan2018, @Wilson2017, and the Week 1 class.
+
+1. @Bryan2018 says Git works best with one kind of file and badly with another. Name both kinds, and give one example of a file from your assignment repo that you would think twice about committing.
+
+\vspace{7cm}
+
+2. @Wilson2017 organize their recommendations under six headings. Name three of them.
+
+\vspace{7cm}
+
+3. @Wilson2017 give a rule for raw data. What is it, and where in the project layout they recommend does raw data live relative to the files your scripts generate?
+
+\vspace{7cm}
+
+4. @DeAngelis2026 says a GitHub Actions workflow file has five core components. Name three of them, and say in one line what one of the three does.
+
+\vspace{7cm}
+
+\newpage
+
+5. In a scheduled GitHub Actions workflow, `cron: '0 7 * * *'` runs at 7:00 in which time zone? And which repository setting has to be changed before the workflow can commit the data it collects back to the repo?
+
+\vspace{7cm}
+
+6. Where does @DeAngelis2026 store the Bluesky username and password, and how does the YAML file refer to them?
+
+\vspace{7cm}
+
+\newpage
+
+7. The Week 1 demonstration used the daily shelter overnight occupancy data from Open Data Toronto.
+   a. What does one row of the raw file represent?
+   b. The data distinguish two capacity types. Name them, and say why summing `OCCUPIED_BEDS` does not give the number of people in the system.
+   c. How many people were in Toronto's shelter system last night?
+
+\vspace{7cm}
+
+8. Your Actions workflow installs `uv` and runs `uv sync` before running the script, even though the script already runs on your laptop. Why?
+
+\vspace{7cm}
+
+9. Suggest one question that would assess student learning of any of the readings.
+
+\vspace{7cm}
+
+\newpage
+
+# References
