@@ -104,7 +104,7 @@ You are welcome to use R, Python, or a combination throughout.
     - (Classic paper) Donoho (2017).
     - (Lecture) Features of good writing by section: title, abstract, introduction, data, model, results, discussion.
     - (Worksheet) Draft a paper from three sets of results and then edit three drafts.
-    - (Worksheet, 30 min) Referee a Donaldson-style paper written entirely by a model: is it any good, and how do you know?
+    - (Worksheet, 30 min) Referee one of the example Donaldson papers: is it any good, and how do you know?
     - Donaldson paper questions.
 
 #### Week 4 (starts Monday 28 September): Assignment I and in-class exam I
@@ -189,7 +189,7 @@ You are welcome to use R, Python, or a combination throughout.
     - (Lecture) Linear and generalized linear models; asking the model for predictions and comparisons.
     - (Demonstrations) EDA of the raw shelter file, which has a row for each program on each night, with the decisions written down as we make them; simulate data with known parameters, fit the model, and check that we get them back, and then fit the same models to real data; marginal effects tables and graphs for those models.
     - (Worksheets) EDA of your Final paper dataset; write the model section for three fitted models; write the results section for the same three.
-    - (Housekeeping) Your Week 3 referee reports come back. There is a draft swap sheet in the folder to use with someone else in the class before you submit.
+    - (Housekeeping) There is a draft swap sheet in the folder to use with someone else in the class before you submit.
 
 #### Week 10 (starts Monday 16 November)
 

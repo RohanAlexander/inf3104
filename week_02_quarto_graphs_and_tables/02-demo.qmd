@@ -95,6 +95,10 @@ tt(latest, digits = 3) |>
 
 ## Step 5: Citations
 
+asdf @Deffner2024 
+
+[@Deffner2024]
+
 Citations come from `references.bib` and the `bibliography` line in the header. Writing `@healy2019` gives @healy2019, and `[@healy2019]` gives a parenthetical [@healy2019]. The reference list is added at the end automatically.
 
 # Rendering

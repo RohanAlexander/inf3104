@@ -1,0 +1,69 @@
+---
+title: "Worksheet"
+author: "Rohan Alexander"
+date: "2026-09-25"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+# Draft from results
+
+Below are two sets of results. Pick one and write a title, a one-paragraph abstract, and a results paragraph (that could fit into the Introduction).
+
+## Toronto shelter occupancy
+
+Average number of people in Toronto's shelter system each night, by sector, from the City of Toronto's daily shelter overnight occupancy data (Open Data Toronto, 2026).
+
+| Sector | January 2026 | August 2026 |
+|---|---:|---:|
+| Families | 2,295 | 2,027 |
+| Men | 2,058 | 1,578 |
+| Mixed Adult | 3,042 | 2,443 |
+| Women | 1,081 | 887 |
+| Youth | 741 | 705 |
+| All sectors | 9,217 | 7,640 |
+
+## Iris measurements
+
+Means (standard deviations) of four measurements, in centimetres, for 50 flowers of each of three iris species (collected by Edgar Anderson, and used by @Fisher1936).
+
+| Species | Sepal length | Sepal width | Petal length | Petal width |
+|---|---:|---:|---:|---:|
+| Setosa | 5.01 (0.35) | 3.43 (0.38) | 1.46 (0.17) | 0.25 (0.11) |
+| Versicolor | 5.94 (0.52) | 2.77 (0.31) | 4.26 (0.47) | 1.33 (0.20) |
+| Virginica | 6.59 (0.64) | 2.97 (0.32) | 5.55 (0.55) | 2.03 (0.27) |
+
+\newpage
+
+# Edit three drafts
+
+Each paragraph below is a draft results or discussion paragraph about the shelter data. Edit each one so that it says what it has to say in the fewest words that are still clear, in the active voice, with the finding first. Cross out and rewrite on the page.
+
+## Draft 1
+
+> It is important to note that, as can be clearly seen from the results that are presented in Table 1 above, there was found to be a very significant decrease in the total number of individuals who were making use of the shelter system in the City of Toronto over the course of the period of time between the month of January and the month of August in the year 2026, with the total falling quite dramatically from a figure of approximately 9,217 people to a figure of approximately 7,640 people.
+
+## Draft 2
+
+> The data were downloaded and the columns were selected and the rows with missing values were filtered out and then the data were aggregated by date and sector and it was found that the decline was seen in every sector but it was largest for men and it was smallest for youth and the reasons for this are not known but they could be related to policy changes or seasonal factors or data quality or other things which would need to be investigated in future work.
+
+## Draft 3
+
+> Utilizing a comprehensive polars-based ETL pipeline leveraging the CKAN API endpoint, we operationalized nightly occupancy as SERVICE_USER_COUNT aggregated at the sector-date grain. Our findings robustly demonstrate a monotonic downward trajectory across the temporal window, notwithstanding the heterogeneity of bed-based versus room-based capacity modalities, which represents a paradigm-relevant contribution to the shelter utilization literature.
+
+\newpage
+
+# Referee a paper
+
+Look at one of the example Donaldson papers and write a one-paragraph referee report answering one question: is it any good, and how do you know? Name at least one specific thing you checked (a number, a figure, a claim about the data, a citation) and say what you found when you checked it.
+
+\newpage
+
+# Your Donaldson paper
+
+Write down the dataset you will use, the question you will answer with it, the one graph you expect to be the centre of the paper, and the thing you are most worried about. We will go through these.
+
+\newpage
+
+# References
