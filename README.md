@@ -37,7 +37,7 @@ You are welcome to use R, Python, or a combination throughout.
     - Classic paper: Make a PR to the class repo (https://github.com/RohanAlexander/inf3104) by EOD Wednesday before class in the week of your paper (Week 3, 5, 6, or 7).
 - Team size:
     - For Assignment I please work individually.
-    - For Assignment II, please work in teams of one to two.
+    - For Assignment II, please work in teams of one to four.
     - For Assignment III, please work individually.
     - Classic paper presentations: Please work individually.
 - Details:
