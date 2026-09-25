@@ -134,7 +134,7 @@ You are welcome to use R, Python, or a combination throughout.
     - Salganik, Matthew, 2018, *Bit by Bit: Social Research in the Digital Age*, [Chapter 4 "Running experiments"](https://www.bitbybitbook.com/en/1st-ed/running-experiments/).
     - (Classic) Fisher, Ronald, 1935, *The Design of Experiments*, Chapter 2 "The principles of experimentation, illustrated by a psycho-physical experiment" (the lady tasting tea).
 - Class (Friday 16 October)
-    - (Quiz) Week 5 readings and class, including Neyman (1934).
+    - (qqqQuiz) Week 5 readings and class, including Neyman (1934).
     - (Classic paper) Fisher (1935).
     - (Lecture) Gathering data that exist, and creating data that do not, with experiments and surveys.
     - (Demonstration) Get data from an API with credentials in environment variables; scrape a table politely; parse a table out of a PDF.
