@@ -1,0 +1,10 @@
+[project]
+name = "week-5"
+version = "0.1.0"
+description = "Week 5: simulate a population and compare sampling designs"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.3.2",
+    "polars>=1.33.0",
+]

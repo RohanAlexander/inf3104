@@ -198,10 +198,10 @@ You are welcome to use R, Python, or a combination throughout.
 
 #### Week 12 (starts Monday 30 November)
 
-- Wednesday 2 December: Final paper due EOD.
 - Friday 4 December: Class time for the Final paper.
 
-#### Exam period
+#### After classes end
 
-(Optional) Final exam, all three parts.
+- Wednesday 9 December: Final paper due EOD.
+- Friday 11 December: Defences.
 

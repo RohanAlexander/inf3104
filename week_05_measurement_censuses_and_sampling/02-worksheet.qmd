@@ -1,0 +1,98 @@
+---
+title: "Worksheet"
+author: "Rohan Alexander"
+date: "2026-10-09"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+# Measurement
+
+1. We want to know whether people in Toronto are sleeping worse than they were ten years ago. Write down three different ways that "sleeping worse" could be measured. For each, say what the instrument is, what the units are, and give one reason to doubt its validity and one reason to doubt its reliability.
+
+\vspace{5cm}
+
+2. The City of Toronto's daily shelter occupancy data, which we used in Part 1, record the number of people in each shelter program each night. Someone uses them as a measure of homelessness in Toronto. Who is counted that should not be, who is not counted that should be, and in which direction does each push the number?
+
+\vspace{5cm}
+
+3. For each of the following say whether the data are censored, truncated, or missing, and what would go wrong if we ignored it.
+    a. A survey records income in bands, and the top band is "$200,000 or more".
+    b. A study of hospital stays uses records of patients who were discharged in 2025.
+    c. A bathroom scale that reads up to 150 kg.
+    d. A question about drug use that one in five respondents skip.
+
+\newpage
+
+# Population, frame, and sample
+
+Your group will be given one of the three surveys below. Write down the target population, the sampling frame, and how the sample is selected. Then write down one group that the survey leaves out of its target population by definition, one group that is in the target population but is likely to be missed by the frame, and one way that those who respond might differ from those who were selected. You will need to find and read the methodology documentation. Write down where you found each answer, because you will do this again, at length, if you pick the Howrah paper.
+
+4. The Canadian Labour Force Survey, which produces the monthly unemployment rate.
+
+\vspace{5cm}
+
+5. The US General Social Survey.
+
+\vspace{5cm}
+
+6. A poll about the Toronto mayoral election conducted on an online opt-in panel, reported in a newspaper this month. (Pick a real one.)
+
+\newpage
+
+# Bowley in Reading
+
+These questions are about @bowley1913working.
+
+7. How did Bowley choose which households to visit? Which of the designs from the lecture is it closest to, and what would have had to be true of his list for that to cause a problem?
+
+\vspace{4cm}
+
+8. Bowley had to decide what a "working-class household" was before he could sample one. Find the definition in the paper. Name one kind of household that you think his definition would have missed, and say how that would affect his estimate of poverty.
+
+\vspace{4cm}
+
+9. What does Bowley say about how far wrong his estimates could be because they come from a sample? Put his argument in your own words, in two or three sentences, using the language of the demonstration.
+
+\vspace{4cm}
+
+10. What could Bowley claim about Reading? What could he claim about England? What is the difference?
+
+\newpage
+
+# Neyman
+
+These questions are about Sections I, III, and V of @neyman1934two.
+
+11. What is purposive selection, and what is the case for it? Make the best argument for it that you can in three sentences.
+
+\vspace{4cm}
+
+12. What went wrong with Gini and Galvani's sample of the Italian census, according to Neyman?
+
+\vspace{4cm}
+
+13. A polling firm recruits respondents online, and then weights them so that the sample matches the census on age, gender, region, and education. Is this closer to random or to purposive selection? What would Neyman want to know before trusting it?
+
+\newpage
+
+# The simulation
+
+Work from `01-demo.qmd`. Pick two of the changes listed under "Things to change", make them, and re-run.
+
+14. Before you run each one, write down what you expect to happen to the mean and to the standard deviation of the estimates. Then write down what did happen.
+
+\vspace{5cm}
+
+15. The demonstration gave every design the same number of households. Suppose instead that every design gets the same budget of $15,000, that it costs $10 to interview a household, and that it costs $200 to send an interviewer to a block that they are not already visiting. Which design would you choose, and how many households would you get?
+
+\newpage
+
+# Assignment II
+
+16. Write down your team, and whether you will do the Howrah or the Dysart paper. If Howrah, which survey, and which aspect of it? If Dysart, which country's DHS final report, which table, and why is it worth having as a dataset? Then write down the thing you are most worried about.
+
+\newpage
+
+# References

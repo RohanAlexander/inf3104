@@ -1,0 +1,42 @@
+---
+title: "Assignment 2: A paper about data"
+author: "Rohan Alexander"
+date: "2026-10-09"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+Due: EOD Wednesday 4 November. Work in a team of one to four. Submit a link to your GitHub repo via Quercus, and do not modify the repo after the due date. On Friday 6 November you will defend the paper in class, and everyone in a team needs to be able to explain all of it.
+
+# What you will do
+
+Part 1 was about how to work. Part 2 is about data. That means what was measured and how, who could have been in the data and who was, and how a dataset gets made, tested, documented, and shared. In Assignment 2 you write a paper in which that is the main event. Pick one of two papers from @Alexander2023. The task, checks, FAQ, rubric, and examples for each are in the book, and the rubric there is the one that will be used.
+
+# Option A: the Howrah paper
+
+<https://tellingstorieswithdata.com/25-papers.html#sec-paper-three>
+
+Obtain data from the US General Social Survey (or, with my permission in advance, another government-run survey), focus on one aspect, and tell a story with it. What makes this a Part 2 paper is the data section, which discusses the survey's methodology. That covers the population, frame, and sample, how the sample is recruited, the sampling approach and its trade-offs, how non-response is handled, and what is good and bad about the questionnaire. In an appendix you design a supplementary survey that could be used to augment the one you used, and implement it on a survey platform.
+
+Weeks 5 and 6 are the ones that you most need.
+
+# Option B: the Dysart paper
+
+<https://tellingstorieswithdata.com/25-papers.html#sec-paper-four>
+
+Turn at least one full-page table from a DHS Program final report from the 1980s or 1990s into a usable dataset, and then tell a story with it. You will simulate the dataset that you plan to end up with, parse or OCR the PDF and save the first parse untouched, clean and prepare it, and test it, with at least a test of class and a test of content for every variable. You then save it as Parquet and write a datasheet for it, following @Gebru2021, as an appendix.
+
+The task in the book names R scripts. You are welcome to use Python, R, or a combination, with the same structure of `00-simulate`, `01-gather`, `02-clean_and_prepare`, and tests. The Week 6 demonstration does this for one small table from the 1993 Kenya report, which you therefore cannot use. Weeks 6 and 7 are the ones that you most need.
+
+# Either way
+
+- The repo is reproducible. If there are data that you cannot include, because the licence does not allow you to share them, then the README says why, how to get them, and where to put them, and the repo includes a small sample or a simulated stand-in with the right file names so that the code runs.
+- Everything from Part 1 still applies: a well-organized folder, meaningful commits, a Quarto document that renders to PDF, graphs and tables that are cross-referenced and show the data, and writing that has been edited. Nothing in the paper shows that it was written for a class.
+- Work through pull requests. For teams of more than one, I will look at the commit history to see that everyone contributed.
+
+# The defence
+
+The defence is a short conversation about your own paper. For instance, I may ask you to justify a decision that you made, to explain a line of your code, or to say what would change if something about the data were different.
+
+# References
