@@ -9,7 +9,7 @@
 Quantitative approaches have a common concern: how can others be confident that our statistical models have been brought to bear on appropriate datasets? This course focuses on the "data" of data science. It develops an appreciation for the many ways in which dealing with a dataset can get out of hand, and establishes approaches to ensure data science is conducted in ways that engender trusted findings. It touches on statistical modeling, but focuses on everything that comes before and after modeling, and in doing so ensures that modeling and analysis are placed on a firmer foundation.
 
 The 12-week semester is broken into three parts, each of four weeks.
-So the normal cadence of class is three weeks of learning and then in the fourth week you will submit an assignment on the Wednesday, and complete an in-class exam on the Friday.
+So the normal cadence of class is three weeks of learning and then in the fourth week you will submit an assignment on the Wednesday, and defend it in class on the Friday.
 
 - Part 1 (Weeks 1-4): Foundations: *You will set up a reproducible workflow and use it to write a short paper from real data. We will use this motivation to learn to use uv, Python, R, Git and GitHub, GitHub Actions, and Quarto, to make graphs and tables, and to write clearly.*
 - Part 2 (Weeks 5-8): Data: *You will either take a government-run survey apart, or turn a table in a scanned PDF into a tested, documented, dataset, and then write a paper about it. We will use this motivation to learn about measurement, censuses, and sampling; to gather data from APIs, websites, and PDFs; to run experiments and surveys; and to clean, test, document, store, and share a dataset.*
@@ -32,7 +32,7 @@ You are welcome to use R, Python, or a combination throughout.
 - Most weeks with a lecture begin with a quiz on the previous week's readings and class.
 - Due dates:
     - Part 1: Assignment due Wednesday 7 October and then we'll use some of class time on Friday 9 October for the defence.
-    - Part 2: Assignment due Wednesday 4 November and then we'll use some of class time on Friday 9 October for the defence.
+    - Part 2: Assignment due Wednesday 4 November and then we'll use some of class time on Friday 6 November for the defence.
     - Part 3: Assignment due Wednesday 9 December and then we'll arrange orals on 11 December.
     - Classic paper: Make a PR to the class repo (https://github.com/RohanAlexander/inf3104) by EOD Wednesday before class in the week of your paper (Week 3, 5, 6, or 7).
 - Team size:
@@ -134,7 +134,7 @@ You are welcome to use R, Python, or a combination throughout.
     - Salganik, Matthew, 2018, *Bit by Bit: Social Research in the Digital Age*, [Chapter 4 "Running experiments"](https://www.bitbybitbook.com/en/1st-ed/running-experiments/).
     - (Classic) Fisher, Ronald, 1935, *The Design of Experiments*, Chapter 2 "The principles of experimentation, illustrated by a psycho-physical experiment" (the lady tasting tea).
 - Class (Friday 16 October)
-    - (qqqQuiz) Week 5 readings and class, including Neyman (1934).
+    - (Quiz) Week 5 readings and class, including Neyman (1934).
     - (Classic paper) Fisher (1935).
     - (Lecture) Gathering data that exist, and creating data that do not, with experiments and surveys.
     - (Demonstration) Get data from an API with credentials in environment variables; scrape a table politely; parse a table out of a PDF.
@@ -160,10 +160,10 @@ You are welcome to use R, Python, or a combination throughout.
 
 #### Reading Week (26-30 October)
 
-#### Week 8 (starts Monday 2 November): Assignment II and in-class exam II
+#### Week 8 (starts Monday 2 November): Assignment II
 
 - Wednesday 4 November: Howrah or Dysart paper due EOD.
-- Friday 6 November: In-class exam II.
+- Friday 6 November: Defences.
 
 ### Part 3: Exploring and modeling
 
@@ -196,10 +196,10 @@ You are welcome to use R, Python, or a combination throughout.
 - Class (Friday 27 November)
     - Please feel free to use this time to work on your Final paper.
 
-#### Week 12 (starts Monday 30 November): Assignment III and in-class exam III
+#### Week 12 (starts Monday 30 November)
 
 - Wednesday 2 December: Final paper due EOD.
-- Friday 4 December: In-class exam III.
+- Friday 4 December: Class time for the Final paper.
 
 #### Exam period
 
