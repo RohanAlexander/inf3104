@@ -1,0 +1,107 @@
+---
+title: "Worksheet"
+author: "Rohan Alexander"
+date: "2026-10-16"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+# Tea
+
+We will run the experiment in Chapter 2 of @Fisher1935. Work in groups of three, with a taster, someone who prepares the cups, and someone who records. You have eight cups, tea, and milk.
+
+1. Before you start, write down the protocol. This covers how much tea and how much milk go in each cup, how the cups are marked so that the taster cannot tell which is which, how the order is randomized (say what you will use to randomize rather than "mixed up"), and what the taster is told. What else needs to be held the same?
+
+\vspace{5cm}
+
+2. Before you start, also write down what result would convince you that the taster can tell the difference.
+
+\vspace{2cm}
+
+3. Run it. How many of the four milk-first cups did the taster identify?
+
+\vspace{2cm}
+
+4. There are 70 ways to choose four cups from eight. Fill in the table. How many of those ways get exactly this many of the four milk-first cups right, and so what is the probability if the taster is guessing? (Hint: to get exactly three right you choose three of the four milk-first cups and one of the four tea-first cups.)
+
+| Number right | Number of ways | Probability |
+|---:|---:|---:|
+| 4 | 1 | 1/70 |
+| 3 | | |
+| 2 | | |
+| 1 | | |
+| 0 | | |
+| Total | 70 | 1 |
+
+5. What is the probability of doing at least as well as your taster did, by guessing? Are you convinced?
+
+\vspace{3cm}
+
+\newpage
+
+6. Now simulate it. Write code that shuffles eight cups, has a taster guess four at random, counts how many are right, and repeats this 10,000 times. Compare the proportions to your table.
+
+\vspace{1cm}
+
+7. Fisher asks why eight cups rather than six. What is the probability of a perfect score by guessing with six cups, three of each? With twelve, six of each? What is the cost of more cups?
+
+\vspace{4cm}
+
+8. Suppose that the taster really can tell, but not perfectly. Each cup gives them an impression of how much it tastes like milk-first, which is a draw from a normal distribution with standard deviation 1, and with mean 1 if the cup was milk-first and mean 0 if it was not. Change your simulation so that the taster picks the four cups with the largest impressions. How often does a taster like this get all four right with eight cups? What does that tell you about what the experiment can detect?
+
+\vspace{4cm}
+
+9. Your group used one taster. What can you claim about that person? What can you claim about people? Which kind of validity is each of these?
+
+\newpage
+
+# Survey questions
+
+10. The Faculty would like to know whether PhD students have enough quiet space to work. In your Assignment II team (or a pair), write five survey questions that would help answer that. For each, say whether it is open or closed, and if closed give the options.
+
+\vspace{9cm}
+
+11. Swap with another team. Your job is now to break their questions. For each, try to find a respondent who could not answer it, a respondent for whom no option fits or for whom two options fit, a word that two respondents would read differently, a question that asks two things at once, or an earlier question that changes the answer to a later one. Write down what you found.
+
+\vspace{6cm}
+
+\newpage
+
+12. Get your questions back. Rewrite them.
+
+\vspace{6cm}
+
+13. Who would you send this survey to, and how? What is the target population, what is the frame, and who do you expect would not respond? In which direction would that push the answer?
+
+\vspace{5cm}
+
+14. Would you need ethics approval to run this survey and use the results in a paper? Find the relevant U of T guidance and write down where you found it.
+
+\newpage
+
+# Gathering
+
+Work from `02-demo.qmd`.
+
+15. Pick a different Open Data Toronto dataset. Change `scripts/01-api.py` to find out how many files it has, and get the first 100 rows of one of them. What type is each column when it arrives, and what type should it be?
+
+\vspace{3cm}
+
+16. Look at `https://en.wikipedia.org/robots.txt`. Is what we did in `scripts/02-scrape.py` allowed? Find one thing that is not.
+
+\vspace{3cm}
+
+17. Add the dates that each prime minister was in office to the scraped dataset. Simulate what you expect first, and write the tests before the parsing code. What is a row now?
+
+\vspace{3cm}
+
+18. `scripts/03-parse_pdf.py` extracts the text from the PDF once, saves it to `data/raw/first_parse.txt`, and after that reads from that file. Make a copy of that file, change one digit in the table by hand, as an OCR error might, and re-run the script. Put the original back when you are done. Which digits does the total fertility rate test catch? Which can it not catch?
+
+\vspace{3cm}
+
+19. If you are doing the Dysart paper, open your DHS final report to the table that you chose. Does the PDF have a text layer? What in the table could serve as a check?
+
+\newpage
+
+# References

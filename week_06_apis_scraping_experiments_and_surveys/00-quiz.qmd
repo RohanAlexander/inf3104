@@ -1,0 +1,356 @@
+---
+title: "Quiz 3"
+subtitle: "Week 5: measurement, censuses, and sampling"
+author: "Rohan Alexander"
+date: "2026-10-16"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  pdf:
+    fontsize: 10pt
+    geometry:
+      - margin=2.2cm
+    include-in-header:
+      text: |
+        \usepackage{needspace}
+---
+
+# Answer sheet
+
+```{=latex}
+\noindent Name: \rule{6.5cm}{0.4pt}\hfill Student number: \rule{4.5cm}{0.4pt}
+```
+
+\vspace{0.4cm}
+
+Fill in one box completely for each of questions 1 to 33. Only this sheet is marked for the multiple-choice questions. The short-answer questions are answered in the space under each one.
+
+\vspace{0.4cm}
+
+```{=latex}
+{\setlength{\fboxsep}{0pt}\setlength{\tabcolsep}{1.6em}
+\begin{center}
+\begin{tabular}{lll}
+\makebox[1.7em][r]{\small\textbf{1}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{16}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{31}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{2}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{17}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{32}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{3}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{18}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{33}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{4}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{19}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{5}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{20}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{6}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{21}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{7}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{22}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{8}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{23}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{9}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{24}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{10}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{25}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{11}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{26}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{12}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{27}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{13}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{28}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{14}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{29}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{15}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{30}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\end{tabular}
+\end{center}}
+```
+
+\newpage
+
+# Multiple choice (questions 1 to 33)
+
+These questions are about Chapter 6 of @Alexander2023, Chapter 9 of @statcanhistory, @bowley1913working, @neyman1934two, and the Week 5 lecture.
+
+\needspace{7\baselineskip}
+**1.** In @Alexander2023, what are "farmed" data?
+
+(A) Data gathered from websites, APIs, and PDFs by writing code
+(B) Data created by the analyst by running an experiment
+(C) Data made in order to be a dataset, such as a census
+(D) Data that a firm collects as a by-product of its operations
+
+\needspace{7\baselineskip}
+**2.** A measurement is valid when:
+
+(A) Two people who measure the same thing get the same value
+(B) The instrument reports more decimal places than we need
+(C) The measured values are close to a normal distribution
+(D) What is measured relates to the question being asked
+
+\needspace{7\baselineskip}
+**3.** Two enumerators count the shops on one street on one afternoon and get different counts. This is first a problem of:
+
+(A) Validity
+(B) Truncation
+(C) Coverage
+(D) Reliability
+
+\needspace{7\baselineskip}
+**4.** After Chernobyl, the instruments available had a maximum reading, and they showed that maximum. The radiation data were:
+
+(A) Missing at random, given the location of the instrument
+(B) Right-censored: the true value is at or above what was recorded
+(C) Left-censored: the true value is at or below what was recorded
+(D) Truncated: values in that range were never recorded at all
+
+\needspace{7\baselineskip}
+**5.** A study uses records of patients who were discharged from hospital in 2025, and so has nobody who was still in hospital at the end of the year. Length of stay is:
+
+(A) Imputed
+(B) Left-censored
+(C) Right-censored
+(D) Truncated
+
+\needspace{7\baselineskip}
+**6.** Men are less likely than women to answer a question about how severe their depression is, and we record each respondent's gender. If, within each gender, skipping is unrelated to severity, the data are:
+
+(A) Missing not at random (MNAR)
+(B) Missing completely at random (MCAR)
+(C) Missing at random (MAR)
+(D) Censored at the median
+
+\needspace{7\baselineskip}
+**7.** People with the highest incomes are the least likely to report their income. Income is:
+
+(A) Truncated below
+(B) Missing not at random (MNAR)
+(C) Missing completely at random (MCAR)
+(D) Missing at random (MAR)
+
+\needspace{7\baselineskip}
+**8.** What is the main risk of dropping every row that has a missing value?
+
+(A) Those who remain may differ from those who were dropped
+(B) The standard errors will always be too small afterwards
+(C) The variables that remain will change their type
+(D) Most software is unable to fit a model afterwards
+
+\needspace{7\baselineskip}
+**9.** What does "data are not neutral" mean in the lecture?
+
+(A) Numeric data are more objective than data made of text
+(B) Two analysts given one dataset will reach the same result
+(C) Datasets from governments should not be used in research
+(D) What is measured, and how, reflects choices and power
+
+\needspace{7\baselineskip}
+**10.** According to the lecture, drawing on Scott, why did states come to measure so much about their populations?
+
+(A) Because cheap instruments for measurement had become available
+(B) To reduce the amount of measurement error in parish records
+(C) To make society legible, for taxation and conscription
+(D) To provide researchers with open data for reproducible work
+
+\needspace{7\baselineskip}
+**11.** In @statcanhistory, which error occurs when people or dwellings are omitted, or are counted more than once?
+
+(A) Processing error
+(B) Coverage error
+(C) Non-response error
+(D) Response error
+
+\needspace{7\baselineskip}
+**12.** In @statcanhistory, a respondent misunderstands a question and misreports a characteristic. This is:
+
+(A) Response error
+(B) Sampling error
+(C) Coverage error
+(D) Processing error
+
+\needspace{7\baselineskip}
+**13.** In @statcanhistory, a valid but inaccurate value is inserted during imputation to replace a missing response. This is an example of:
+
+(A) Processing error
+(B) Sampling error
+(C) Response error
+(D) Coverage error
+
+\needspace{7\baselineskip}
+**14.** In @statcanhistory, why does sampling error apply only to the long-form questionnaire?
+
+(A) Only the long form asks questions that people may misunderstand
+(B) Only the long form has its missing answers filled by imputation
+(C) Only the long form goes to a sample of households, not to all of them
+(D) Only the long form is filled in online, and not by an enumerator
+
+\needspace{7\baselineskip}
+**15.** What is the Census Undercoverage Study designed to estimate?
+
+(A) The share of questionnaires with only partial responses
+(B) The number of people who were counted more than once
+(C) The number of dwellings that were wrongly classified
+(D) The number of people who were omitted from the census
+
+\needspace{7\baselineskip}
+**16.** What does the Census Overcoverage Study identify?
+
+(A) Entries that became invalid during data processing
+(B) Cases where individuals were counted more than once
+(C) Cases where individuals were missed by the census
+(D) Dwellings that were classified as unoccupied in error
+
+\needspace{7\baselineskip}
+**17.** In the Census of Population, what is the total non-response (TNR) rate used for?
+
+(A) Measuring age heaping
+(B) Detecting duplicate households
+(C) Drawing the long-form sample
+(D) Data quality assessment
+
+\needspace{7\baselineskip}
+**18.** What is a sampling frame?
+
+(A) The list of units from which a sample can be drawn
+(B) The period of time during which the data are collected
+(C) The entire group about which we want to draw conclusions
+(D) The units that we end up collecting data about
+
+\needspace{7\baselineskip}
+**19.** What distinguishes probability from non-probability sampling?
+
+(A) Every unit in the frame has a known chance of being selected
+(B) No sampling frame is needed for a probability sample
+(C) A probability sample always costs less for a given size
+(D) Every unit in the frame has the same chance of being selected
+
+\needspace{7\baselineskip}
+**20.** In which design is the first unit chosen at random, and then every kth unit taken after it?
+
+(A) Stratified sampling
+(B) Cluster sampling
+(C) Quota sampling
+(D) Systematic sampling
+
+\needspace{7\baselineskip}
+**21.** What characterizes stratified sampling?
+
+(A) The population is split into groups, and we sample within every group
+(B) Participants recruit further participants through their networks
+(C) Units are chosen to fill quotas, by whatever means are convenient
+(D) The population is split into groups, and we sample only some groups
+
+\needspace{7\baselineskip}
+**22.** With strata and with clusters the population is divided into groups that are exhaustive and mutually exclusive. What differs?
+
+(A) Strata must be geographic areas, but clusters can be any grouping
+(B) Clusters must all be the same size, but strata can vary
+(C) We randomize within clusters, but never within strata
+(D) We collect data from every stratum, but not every cluster
+
+\needspace{7\baselineskip}
+**23.** When does stratifying improve precision the most?
+
+(A) When units differ within strata and the strata are similar
+(B) When units are similar within strata and the strata differ
+(C) When the variable used to stratify is unrelated to the outcome
+(D) When every stratum is the same size as the others
+
+\needspace{7\baselineskip}
+**24.** @neyman1934two shows that, for a fixed total sample size, it is best to sample more heavily from strata that are:
+
+(A) Cheaper to reach
+(B) Larger, and less variable
+(C) Larger, and more variable
+(D) Smaller, and more variable
+
+\needspace{7\baselineskip}
+**25.** What is snowball sampling commonly used for?
+
+(A) Hard-to-reach populations, where participants recruit others
+(B) Estimating how precise a probability sample will be
+(C) Ensuring that demographic groups are represented equally
+(D) Well-defined populations for which there is a complete sampling frame
+
+\needspace{7\baselineskip}
+**26.** Quota sampling is like stratified sampling except that:
+
+(A) The groups are formed after the data are collected
+(B) Units within each group are not chosen at random
+(C) Only some of the groups are sampled
+(D) The groups are not mutually exclusive
+
+\needspace{7\baselineskip}
+**27.** How did @bowley1913working select households in Reading?
+
+(A) By asking investigators to find typical households
+(B) By marking one building in ten in the local directory
+(C) By choosing streets at random from a map of the town
+(D) By visiting every household in three chosen districts
+
+\needspace{7\baselineskip}
+**28.** Which design is Bowley's closest to?
+
+(A) Systematic sampling
+(B) Quota sampling
+(C) Cluster sampling
+(D) Purposive selection
+
+\needspace{7\baselineskip}
+**29.** Bowley writes that a sample of about 1 in 21 may seem too small. What is his reply?
+
+(A) A small sample is acceptable because poverty is easy to measure
+(B) Precision depends on the size of the sample, not on its share of the whole
+(C) Precision depends on the share of the whole, which is why he chose 1 in 21
+(D) A small sample is acceptable if the investigators are experienced
+
+\needspace{7\baselineskip}
+**30.** What is purposive selection, as discussed by @neyman1934two?
+
+(A) Choosing units that are the cheapest for the investigators to reach
+(B) Choosing units at regular intervals from a list of the population
+(C) Choosing units so the sample matches the population on known variables
+(D) Choosing units at random from within groups formed using known variables
+
+\needspace{7\baselineskip}
+**31.** According to Neyman, what went wrong with Gini and Galvani's sample from the Italian census?
+
+(A) It was too small for any conclusion to be drawn from it
+(B) It matched on the control variables but not on other things
+(C) It did not match the population even on the control variables
+(D) It was drawn at random, and happened to be an unlucky draw
+
+\needspace{7\baselineskip}
+**32.** Why, for Neyman, can random selection be trusted where purposive selection cannot?
+
+(A) Random selection removes the need for a sampling frame
+(B) Random samples always turn out to be closer to the population's values
+(C) Purposive samples cannot be made large enough to be useful
+(D) Uncertainty comes from the design, which we know, not a model
+
+\needspace{7\baselineskip}
+**33.** The standard error that we calculate from one simple random sample is an estimate of:
+
+(A) The difference between our estimate and the true value
+(B) The spread of the variable of interest across the population
+(C) The spread of the estimates across repeated samples
+(D) The share of the population that was left out of the frame
+
+\newpage
+
+# Short answer (5 questions)
+
+A few sentences each. Write in the space provided.
+
+\needspace{6cm}
+**S1.** We have surveyed everyone in Canada and asked their age. A friend says that there is no need to worry about uncertainty "because we have the whole population". Is your friend right? (4101)
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S2.** Give an example of a variable where zero and missing are easily confused, and say what goes wrong in the analysis if they are.
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S3.** For the Canadian Labour Force Survey, or another survey that you know, state the target population and the sampling frame. Then name one group that the survey's definition of its target population leaves out, and one group that is in the target population but is likely to be missed by the frame.
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S4.** Explain Neyman's objection to purposive selection to someone who runs an online opt-in panel that is weighted to match the census on age, gender, region, and education.
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S5.** What could Bowley claim about Reading from his sample, and what could he not claim about England? Which idea from the lecture is this?
+
+\vspace{5cm}
+
+\newpage
+
+# References

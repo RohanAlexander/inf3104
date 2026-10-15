@@ -1,0 +1,330 @@
+---
+title: "Gathering and hunting data"
+subtitle: "APIs, scraping, and PDFs; experiments and surveys"
+author: "Rohan Alexander"
+date: "2026-10-16"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  revealjs:
+    slide-number: "c/t"
+    show-slide-number: all
+---
+
+# This week
+
+## Plan
+
+- Quiz 3: Week 5 readings and class
+- Classic paper 3: Fisher (1935), Chapter 2
+- Lecture: gathering data that exist, and creating data that do not
+- Demonstration: an API, a scraped table, and a table in a PDF
+- Worksheet: tea tasting, and then breaking each other's survey questions
+
+::: {.notes}
+- Last week was about "farmed" data, which someone else made for us to analyze, such as censuses and surveys. This week covers the other two ways that we get data, following Chapters 7 and 8 of @Alexander2023.
+- "Gathered" data exist, but not as a dataset. They are on a website, behind an API, or in a PDF, and we have to go and get them. The Dysart paper is this.
+- "Hunted" data do not exist until we create them, by running an experiment or a survey. The Howrah paper asks you to design a survey, and to critique one.
+- The readings are those two chapters, Chapter 4 of @Salganik2018, and Chapter 2 of @Fisher1935.
+:::
+
+## Three ways to get data
+
+- Farmed: made to be a dataset, by someone else. Censuses, official statistics, large surveys.
+- Gathered: exists, but not as a dataset. APIs, websites, PDFs.
+- Hunted: does not exist until we make it. Experiments and surveys.
+
+::: {.notes}
+- The distinction matters because of where the work, and the responsibility, sits.
+- With farmed data the measurement and sampling decisions were made by someone else and written down, and our job is to understand them. With gathered data nobody made those decisions deliberately. The data are a by-product of something else, and so we have to work out what they measure and who is in them after the fact. With hunted data we make every decision, and we are responsible for the people involved.
+:::
+
+# Gathering: APIs
+
+## What an API is
+
+- A website for computers rather than people.
+- We send a request to a URL and get back structured data rather than a page.
+- Someone has decided to provide the data, and has decided the terms.
+
+::: {.notes}
+- An Application Programming Interface is a set of rules under which one computer can ask another for something. For us, it is almost always a URL that we can modify to say what we want, and a server that answers with data.
+- If there is an API then use it. It means that the provider wants you to have the data, has said how much you can have and how quickly, and will usually keep the structure stable. Scraping has none of those guarantees.
+- The terms matter. Read them. They will say what you can do with the data, and in particular whether you can share what you get, which bears on whether your work can be reproducible.
+:::
+
+## A request
+
+```
+https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=daily-shelter-overnight-service-occupancy-capacity
+```
+
+- Base URL: where the server is.
+- Endpoint: `package_show`. What we are asking for.
+- Parameters: after the `?`, as `key=value` pairs separated by `&`.
+- In Python: `requests.get(url, params={...})`. In R: `httr2`.
+
+::: {.notes}
+- This is the request behind the shelter data that we have been using since Week 1. Open Data Toronto runs on CKAN, which is open-source software for data portals, so the same request structure works on many government portals.
+- Paste it into a browser. What comes back is not a web page.
+- The response comes with a status code. 200 is success. 404 is not found. 429 is "you are asking too often", and the right response to that is to slow down.
+:::
+
+## What comes back: JSON
+
+```json
+{
+  "success": true,
+  "result": {
+    "title": "Daily Shelter & Overnight Service Occupancy & Capacity",
+    "num_resources": 24,
+    "resources": [
+      {"name": "Daily shelter overnight occupancy", "format": "CSV",
+       "datastore_active": true, "id": "42714176-...", "url": "..."},
+      {"name": "daily-shelter-overnight-service-occupancy-capacity-2025",
+       "format": "CSV", "datastore_active": true, "id": "5dc4fbfc-...", "url": "..."}
+    ]
+  }
+}
+```
+
+- Semi-structured: nested, and not rectangular. (Much abbreviated here.)
+- Our job is to get from this to rows and columns.
+
+::: {.notes}
+- JSON is key and value pairs, which can be nested inside each other, and lists. It maps onto a Python dictionary or an R list. XML is the older alternative and you will still meet it.
+- There is no one way to make nested data rectangular. Here "resources" is a list with one entry per file. We could have one row per dataset, or one row per file, and the choice depends on the question. Decide what a row is before you write code, which is the same advice as simulating before you gather.
+:::
+
+## Keys, limits, and secrets
+
+- Many APIs need a key, which says who you are, so they can limit what you take.
+- A key is a password. It does not go in your code, and it never goes on GitHub.
+- Put it in an environment variable, using `.env` locally and a repository secret in GitHub Actions.
+- Add `.env` to `.gitignore` before you create it.
+
+::: {.notes}
+- You have done this already if you did the Bluesky option in Week 1, where the handle and app password were repository secrets, and the script read them from the environment.
+- If a key does end up in a commit, then deleting it in the next commit does not help, because it is in the history. Revoke the key and make a new one.
+- Respect rate limits. Put a pause between requests. Save the raw response to disk as soon as you get it, so that you ask only once, and do the cleaning in a separate script that reads from disk. That is also what makes the work reproducible if the API later changes or disappears.
+:::
+
+## Packages that wrap APIs
+
+- Often someone has written a package around the API, such as `opendatatoronto`, `cancensus`, `tidycensus`, `spotifyr`.
+- Easier, and the package will usually handle paging and rate limits.
+- But now you depend on the package as well as the API.
+
+::: {.notes}
+- This is a reasonable trade, and it is what I would do first. But know what the package is doing on your behalf, and cite it.
+- Record when you downloaded the data. An API returns what is true today. Open Data Toronto revises the shelter data, and two people who run the same code a month apart can get different numbers.
+:::
+
+# Gathering: web scraping
+
+## Scraping
+
+- Getting data from a website that is made for people, by writing code that reads the page.
+- Opens up a great deal of data.
+- But these are not data that were made available for this purpose.
+
+::: {.notes}
+- That last point is the basis of everything on the next few slides. With an API someone has decided to give you data. With scraping, you have decided to take them.
+- @Alexander2023 puts it as being respectful and being mindful. That is, respectful of the people who run the website and the people whose information is on it, and mindful that legality depends on where you are and what you do.
+:::
+
+## Principles
+
+- If there is an API, use that.
+- Read the terms of service and `robots.txt`.
+- Go slowly, with a pause between requests, and scrape outside of busy hours.
+- Take only what you need, only once. Save the raw pages.
+- Public is not the same as yours to republish.
+
+::: {.notes}
+- Our small research scrape should be indistinguishable, from the server's point of view, from a person reading the site. If the site notices you, you are going too fast.
+- The last point is where reproducibility and privacy collide. The example in @Alexander2023 is the 2016 release of a dataset of scraped OKCupid profiles [@kirkegaard2016okcupid; @zimmer2018addressing]. The profiles were public, in the sense that anyone with an account could see them. But people made them public in a particular context, for a particular purpose, and scraping them into a dataset and posting it changed the context. Nobody consented to that.
+- The terms of service may allow you to scrape but not to republish. Then your repo cannot contain the data, and your README has to say how someone else could get them. Privacy usually wins over reproducibility.
+:::
+
+## How it works
+
+- A web page is HTML, which is nested tags such as `<table>`, `<tr>`, `<td>`, `<a href="...">`.
+- We download the page, parse it into a tree, and select the nodes we want, usually with CSS selectors.
+- Python: `requests` and `beautifulsoup4`. R: `rvest`.
+- Then the cleaning starts.
+
+::: {.notes}
+- Use the browser's "Inspect" tool to find what identifies the thing that you want, which could be a tag, a class, or an id.
+- The pattern is always the same. Get it working for one page. Save that page. Write a function. Then iterate over pages, with a pause, saving each as you go, and expecting some to fail.
+- Websites change. A scraper that works today will break, and it will break silently if you let it, returning an empty table. So test what comes back, such as the number of rows, the column names, and the types. We come back to tests next week.
+:::
+
+# Gathering: PDFs
+
+## PDFs
+
+- A great deal of the historical record is tables in PDFs, such as government reports, statistical yearbooks, and court records.
+- Two different situations:
+    - the PDF contains text, and we parse it; or
+    - the PDF is a picture of text, and we need optical character recognition (OCR).
+
+::: {.notes}
+- A PDF is instructions for putting marks on a page. It knows where each character goes. It does not know what a table, a row, or a column is. So even in the good case what we get back is lines of text, and we have to rebuild the table with string manipulation.
+- The Dysart paper is this task, with DHS final reports from the 1980s and 1990s. Some were typeset on a computer and contain text. Many are scans.
+:::
+
+## OCR makes errors, and they are not random
+
+- 1 and l and I; 0 and O; 5 and S; 8 and 3.
+- A decimal point that vanishes turns 4.7 into 47.
+- A faint column rule becomes a column of 1s.
+
+::: {.notes}
+- This is a measurement problem, of exactly the kind we discussed last week. The instrument is the OCR engine, and it has systematic errors.
+- The defense is the workflow that we have used since Week 1. First simulate the dataset that you expect, which means deciding what the columns are, what type each is, and what range of values is plausible. Then write tests from that. A total fertility rate of 47 fails a range test. Row totals that do not add up fail a consistency test. Tables in reports nearly always have totals, which means that they come with their own checksums. Use them.
+- Save each stage, which means the PDF in inputs, the first parse as it came out, and then the cleaned data. Someone must be able to see what the machine produced and what you changed.
+:::
+
+# Hunting: experiments
+
+## Why experiment?
+
+- We want to know the effect of something.
+- The problem: we only ever see each person with the treatment or without it, never both.
+- The solution: compare groups that are the same, on average, in every way except the treatment.
+- Randomization is how we get such groups.
+
+::: {.notes}
+- This is the fundamental problem of causal inference. For any one person we can never observe the counterfactual.
+- So we give up on individual effects and estimate an average effect, by comparing a treatment group with a control group.
+- If people choose their group, or we choose for them, then the groups differ in ways related to the outcome. For instance, the people who choose to take a new drug are sicker, or richer, or more careful. If a coin chooses, then the groups differ only by chance, in both the things we measured and the things we did not. That second part is what no amount of statistical adjustment can give us.
+:::
+
+## The lady tasting tea
+
+- A colleague claims she can tell whether the milk or the tea went into the cup first.
+- Eight cups, four of each, presented in random order. She knows this, and picks the four that she thinks were milk-first.
+- There are $\binom{8}{4} = 70$ ways to choose four cups from eight.
+- If she cannot tell, the chance of getting all four right is 1/70, about 1.4 per cent.
+
+::: {.notes}
+- This is Chapter 2 of @Fisher1935, and we will do it in the worksheet.
+- In a few pages it contains most of what matters about experimental design. There is a null hypothesis, which is that she cannot tell. There is a reference distribution, and it comes from the design, from the fact that we randomized, rather than from an assumption about the data. And there is a decision, made before we run it, about what result would convince us.
+- Fisher also asks the design questions. He uses eight cups rather than six because, with six, a perfect score has probability 1/20, which is not convincing. If she gets three of four right, then that or better happens 17 times in 70 by chance, about 24 per cent, so it is not evidence of much. He also asks what else must be held the same, such as the temperature, the strength, and the cup.
+- The order is randomized, rather than just "mixed up" by the experimenter. This is for the same reason that Bowley took selection out of his own hands, and it is the same argument Neyman made last week.
+:::
+
+## Threats
+
+- Internal validity: is the estimate right, for these people, in this setting?
+    - Did randomization work? Did people comply? Did people drop out, and differently between groups?
+- External validity: does it apply to anyone else?
+    - Who was in the experiment? Who agreed to be?
+
+::: {.notes}
+- Internal validity first. Check balance between the groups on what you measured before treatment. Non-compliance and attrition break the equivalence that randomization gave us, because who complies and who drops out is not random.
+- External validity is last week's question again. The people in an experiment are a sample of some population, and usually not a probability sample. A result from undergraduates at one university, or from people who respond to an advertisement, is a result about them.
+- Two examples from @Alexander2023 that are worth reading about. In the Oregon Health Insurance Experiment [@finkelstein2012oregon], in 2008, Oregon had funds to expand Medicaid to only some of those eligible and used a lottery, which created a randomized experiment at a scale and on a question that could never otherwise have been run. In the civic honesty study [@cohn2019civic], researchers handed in more than 17,000 "lost" wallets in 355 cities in 40 countries, with or without money in them, and measured whether they were reported. Wallets with more money were more likely to be returned.
+:::
+
+## Ethics: consent
+
+- Tuskegee, 1932 to 1972: around 400 Black men with syphilis were not told they had it and were not treated, for decades after treatment was standard.
+- They did not know they were in a study.
+- Informed consent is the minimum. People know what is being done, agree to it, and can leave.
+
+::: {.notes}
+- This is set out in @Alexander2023, drawing on @brandt1978racism. The researchers actively worked to stop the men from getting treatment elsewhere. By the time it was stopped in 1972 more than half the men had died, many from syphilis-related causes.
+- The harm was not only to the men. @tuskegeeandthehealthofblackmen find that the disclosure of the study is associated with reduced life expectancy for Black men, through mistrust of medicine and fewer visits to doctors.
+- This is why there are research ethics boards. At U of T, if you collect data from people, including with a survey for a class paper that you later want to publish, you need to find out whether you need approval before you collect rather than after.
+:::
+
+## Ethics: equipoise
+
+- To randomize, we must genuinely not know which arm is better.
+- If we already know, then assigning people to the worse arm harms them for nothing.
+- If we do not know, then not running the experiment also harms people, for longer.
+
+::: {.notes}
+- The example in @Alexander2023 is ECMO, a treatment for newborns with respiratory failure, in the 1980s. Early evidence suggested it was much better than conventional treatment. The question was whether it was ethical to randomize more infants to conventional treatment to be sure. The trials used unusual designs to try to minimize the number assigned to the worse arm, and were then criticized because so few infants got the conventional treatment that the evidence was not convincing. There was no way out that everyone accepted.
+- The general point is that an experiment has to be necessary, and the design should expose as few people as possible to the worse option.
+:::
+
+## A/B testing
+
+- Experiments run by firms, through a technology stack, measured with sensors rather than questionnaires.
+- Probably the most common kind of experiment there has ever been.
+- Cheap, fast, enormous samples. Small effects are detectable, and can be worth a lot.
+- Usually no ethics board, and no consent in any meaningful sense.
+
+::: {.notes}
+- The example in @Alexander2023, from @kohavi, is Bing lengthening the title line of advertisements, which increased revenue by 12 per cent.
+- What is distinctive is partly statistical. With millions of observations everything is statistically significant, so the question becomes whether the effect is large enough to matter. Firms run many tests at once on overlapping users. People peek at results and stop when they like them. And what is measured is what is easy to measure, such as clicks, which is rarely what we care about, such as whether people are better off. That is a validity problem, from last week.
+- And it is partly ethical. An A/B test that gets people to spend more at a grocery store is one thing. The same test at a gambling site is another. You are in many of these experiments every day.
+:::
+
+# Hunting: surveys
+
+## Surveys
+
+- Having decided what to measure, a survey is a common way to get values.
+- Three eras: face-to-face, telephone, internet.
+- Each changed who could be reached, what it cost, and who responds.
+- Platforms solve the form. They do not solve the frame.
+
+::: {.notes}
+- Face-to-face and telephone surveys have interviewer effects, where people answer differently depending on who is asking. The internet removed the interviewer and brought very low participation rates.
+- Qualtrics or Google Forms will let you build a form in ten minutes. They assume that you already have someone to send it to. Platforms that supply respondents, such as Prolific, raise last week's question of who these people are, and how they differ from the population that we care about.
+:::
+
+## Writing questions
+
+- Keep the respondent front-of-mind.
+- Every question must be relevant to them, and one that they are able to answer.
+- Use their words, not yours.
+- One thing per question.
+- Closed questions when the options are few and clear, and open when they are not.
+- Order matters because early questions frame later ones.
+
+::: {.notes}
+- What goes wrong. Double-barreled questions, such as "How satisfied are you with the cost and quality of your housing?" Leading questions. Options that overlap, or that leave someone out, such as age bands of 18 to 25 and 25 to 35, or a gender question with two options. Asking for recall that nobody has, such as "How many times did you eat out in the past year?" Jargon.
+- Think about the burden that you are putting on someone who is doing you a favor. Vary the difficulty. Group by topic. Put sensitive questions and demographics toward the end.
+- Remember from last week that what you ask, and what options you offer, is a decision about what exists. Respect for the respondent comes first.
+:::
+
+## Test it
+
+- There is no occasion on which a pilot will not improve a survey.
+- Watch someone fill it in. Ask them what they thought each question meant.
+- If there is no time or money to test the survey, reconsider whether to run it.
+
+::: {.notes}
+- That last line is from @Alexander2023 and I mean it. A survey that has not been tested has not been designed.
+- In the worksheet you will write five questions and another team will try to break them. It always works.
+:::
+
+## Non-response
+
+- Unit non-response: the person does not take part. Item non-response: they skip a question.
+- Neither is random.
+- Weighting adjusts for who responded, on the variables that we observe and have population totals for.
+- It cannot fix differences on things that we do not observe.
+
+::: {.notes}
+- A response rate of under ten per cent is normal for many surveys now. Whether that matters depends on whether those who respond differ from those who do not on the thing being measured, rather than on the rate.
+- This is where Neyman's argument comes back. Once most of the people that we selected do not respond, the randomness of the design no longer justifies the inference by itself, and we are relying on a model of who responds. That is not a reason to give up. It is a reason to say so in the data section.
+- For the Howrah paper this is what the methodology discussion is for. It covers how the sample was recruited, what the response rate was, how the survey handles non-response, and what that means for your story.
+:::
+
+# Conclusion
+
+## Conclusion
+
+- If someone offers you the data, through an API, take them that way.
+- If you are taking them, be respectful, which means slowly, once, only what you need, and thinking before republishing.
+- Simulate and write tests before you gather, because the instrument makes errors.
+- Randomization is what lets an experiment speak about causes. Consent and necessity are what let us run one.
+- A survey is an instrument. Test it, and know who did not answer.
+
+# References

@@ -1,0 +1,40 @@
+Table 3.1 Current fertility
+Age-specific and cumulative fertility rates and the
+crude birth rate for the three years preceding the
+survey, by urban-rural residence, Kenya 1993
+Residence
+Age group Urban Rural Total
+15-19 74 119 110
+20-24 176 281 257
+25-29 178 258 241
+30-34 133 209 197
+35-39 74 166 154
+40-44 (34) 74 70
+45-49 (21) 53 50
+TFR 15-49 3.44 5.80 5.40
+TFR 15-44 3.34 5.54 5.15
+GFR 129 194 182
+CBR 35.1 35.9 35.8
+Note: Rates axe for the period 1-36 months
+preceding the survey. Rates for age group
+45-49 may be slightly biased due to
+truncation. Rates in parentheses are based
+on fewer than 250 woman-yeaxs of
+exposure,
+TFR: Total fertility rate expressed per woman
+GFR: General fertility rate (births divided by
+number of women 15-44), expressed per
+1,000 women
+CBR: Crude birth rate, expressed per 1,000
+population
+Figure 3.1
+Age-Specific Fertility Rates
+By Urban-Rural Residence
+Births per 1,000 Women
+30o
+2OO
+I I I I I
+15-19 20-24 25-29 30-34 35-39 40-44 45-49
+Age Group
+KDHS 1993
+22
