@@ -1,0 +1,396 @@
+---
+title: "Quiz 4"
+subtitle: "Week 6: APIs, scraping, and PDFs; experiments and surveys"
+author: "Rohan Alexander"
+date: "2026-10-23"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  pdf:
+    fontsize: 10pt
+    geometry:
+      - margin=2.2cm
+    include-in-header:
+      text: |
+        \usepackage{needspace}
+---
+
+# Answer sheet
+
+```{=latex}
+\noindent Name: \rule{6.5cm}{0.4pt}\hfill Student number: \rule{4.5cm}{0.4pt}
+```
+
+\vspace{0.4cm}
+
+Fill in one box completely for each of questions 1 to 38. Only this sheet is marked for the multiple-choice questions. The short-answer questions are answered in the space under each one.
+
+\vspace{0.4cm}
+
+```{=latex}
+{\setlength{\fboxsep}{0pt}\setlength{\tabcolsep}{1.6em}
+\begin{center}
+\begin{tabular}{lll}
+\makebox[1.7em][r]{\small\textbf{1}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{16}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{31}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{2}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{17}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{32}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{3}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{18}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{33}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{4}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{19}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{34}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{5}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{20}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{35}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{6}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{21}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{36}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{7}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{22}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{37}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{8}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{23}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{38}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{9}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{24}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{10}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{25}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{11}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{26}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{12}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{27}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{13}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{28}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{14}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{29}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\makebox[1.7em][r]{\small\textbf{15}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} & \makebox[1.7em][r]{\small\textbf{30}}\hspace{0.5em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{A}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{B}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{C}}\hspace{0.25em}\framebox[1.55em][c]{\rule[-0.35em]{0pt}{1.35em}\scriptsize\textcolor{black!45}{D}} &  \\[0.55em]
+\end{tabular}
+\end{center}}
+```
+
+\newpage
+
+# Multiple choice (questions 1 to 38)
+
+These questions are about Chapters 7 and 8 of @Alexander2023, Chapter 4 of @Salganik2018, Chapter 2 of @Fisher1935, and the Week 6 lecture and demonstration.
+
+\needspace{7\baselineskip}
+**1.** In the language of @Alexander2023, a table of fertility rates in a scanned report from 1993 is:
+
+(A) Farmed data: it was made in order to be a dataset
+(B) Gathered data: it exists, but not as a dataset
+(C) Hunted data: it did not exist until we created it
+(D) Simulated data: it was generated from a model
+
+\needspace{7\baselineskip}
+**2.** For which kind of data does the analyst make every measurement and sampling decision, and carry the responsibility for the people involved?
+
+(A) Farmed
+(B) Hunted
+(C) Scraped
+(D) Gathered
+
+\needspace{7\baselineskip}
+**3.** What is the best reason to prefer an API to scraping, when both are possible?
+
+(A) The provider chose to offer the data, and set the terms
+(B) An API returns a rectangular dataset that needs no cleaning
+(C) The data from an API are always more accurate than the website
+(D) Scraping is illegal in Canada, whereas using an API is not
+
+\needspace{7\baselineskip}
+**4.** In `.../api/3/action/package_show?id=daily-shelter`, what is `id=daily-shelter`?
+
+(A) A parameter
+(B) A header
+(C) The base URL
+(D) The endpoint
+
+\needspace{7\baselineskip}
+**5.** A server responds with status code 429. What should your code do?
+
+(A) Add an API key: the request was not authorized
+(B) Slow down: it is being asked too often
+(C) Nothing: the request was a success
+(D) Try a different URL: the page was not found
+
+\needspace{7\baselineskip}
+**6.** Why is JSON described as semi-structured?
+
+(A) About half of its fields are typically missing
+(B) It can only be partly read by R and by Python
+(C) It has no types, and so everything is a string
+(D) It is structured, but nested, not rectangular
+
+\needspace{7\baselineskip}
+**7.** In the demonstration, the API's response listed the files that make up the dataset. What had to be decided before it could become a data frame?
+
+(A) How many decimal places to keep
+(B) What a row would be
+(C) Which tests could be skipped
+(D) Which API key to use
+
+\needspace{7\baselineskip}
+**8.** Where should an API key be kept?
+
+(A) In an environment variable, with `.env` in `.gitignore`
+(B) In the README, so that other people can reproduce the work
+(C) In a private GitHub repo, committed along with the code
+(D) At the top of the script, in a variable that is clearly named
+
+\needspace{7\baselineskip}
+**9.** An API key was committed to a public repo by mistake and then removed in the next commit. What now?
+
+(A) Nothing, because the most recent commit no longer contains the key
+(B) Make the repo private, because then the history cannot be seen
+(C) Rename the variable, because then the key cannot be searched for
+(D) Revoke the key and make a new one, as it is in the history
+
+\needspace{7\baselineskip}
+**10.** In the demonstration, what type did the counts of shelter users have when they arrived from the API?
+
+(A) Float
+(B) String
+(C) Integer
+(D) Date
+
+\needspace{7\baselineskip}
+**11.** Why does the demonstration save the raw response to disk before doing anything to it?
+
+(A) So we ask only once, and can see what we changed
+(B) Because polars is unable to read directly from a URL
+(C) Because the terms of service of the API require it
+(D) So that the raw response can be edited by hand if needed
+
+\needspace{7\baselineskip}
+**12.** What does @Alexander2023 say is the difference between data being public on a website and a scraped, cleaned, public dataset of it?
+
+(A) The website is covered by copyright, but the dataset is not
+(B) There is none: once data are public anyone may republish them
+(C) The context changes, and people did not consent to that
+(D) The dataset is more accurate, because it has been cleaned
+
+\needspace{7\baselineskip}
+**13.** Which of these is NOT one of the principles for scraping from the lecture?
+
+(A) Scrape as fast as possible, to shorten the server load
+(B) Read the terms of service, and look at `robots.txt`
+(C) Take only what you need, only once, and save the raw pages
+(D) If there is an API, then use that in place of scraping
+
+\needspace{7\baselineskip}
+**14.** In the demonstration, the second attempt at scraping returned a clean table of 17 prime ministers, with no error or warning. What was wrong?
+
+(A) Prime ministers who served twice were counted twice
+(B) Wikipedia had blocked the request for going too fast
+(C) Every living prime minister was missing from the table
+(D) The table that was scraped was the key to the province abbreviations
+
+\needspace{7\baselineskip}
+**15.** What caught that problem?
+
+(A) A warning from polars about the number of nulls
+(B) An error message raised by the BeautifulSoup package
+(C) Looking at the first five rows of the result
+(D) A test, written in advance, of the number of rows
+
+\needspace{7\baselineskip}
+**16.** The terms of service allow you to scrape a site but not to republish what you get. What does that mean for your repo?
+
+(A) It can hold the data, provided that the repo is public
+(B) It cannot hold the data; the README says how to get them
+(C) It can hold the data, provided that you cite the site
+(D) Nothing, because terms of service do not apply to research
+
+\needspace{7\baselineskip}
+**17.** What does a PDF that contains text "know" about a table on the page?
+
+(A) The values in each cell, stored as typed numbers
+(B) Where each character goes, but not rows or columns
+(C) Nothing: every PDF is a picture, and needs OCR
+(D) The rows and columns, but not the column headings
+
+\needspace{7\baselineskip}
+**18.** In the demonstration, the note under the fertility table read "Rates axe for the period". Why does that matter?
+
+(A) It does not matter, because the note is not part of the table
+(B) It shows that pdfplumber is less accurate than the other packages
+(C) If OCR can misread a letter, then it can misread a digit
+(D) It shows that the report was written carelessly in 1993
+
+\needspace{7\baselineskip}
+**19.** The table reported a total fertility rate as well as age-specific rates. How was that used?
+
+(A) As a replacement for any age-specific rate that was missing
+(B) As an extra row in the cleaned dataset, labeled "Total"
+(C) It was dropped, because it is derived from the other rows
+(D) As a test: it should be implied by the age-specific rates
+
+\needspace{7\baselineskip}
+**20.** Some rates in the table were printed in parentheses, meaning few woman-years of exposure. What did the demonstration do with that?
+
+(A) Dropped those rows, because they are unreliable
+(B) Stripped the parentheses, and otherwise ignored them
+(C) Kept the parentheses in the column, stored as a string
+(D) Stripped them, and recorded the flag in its own column
+
+\needspace{7\baselineskip}
+**21.** What does randomization give us that statistical adjustment cannot?
+
+(A) Groups alike, on average, even in what we did not measure
+(B) An estimate of the effect of treatment on each person
+(C) Groups that are identical on every variable that we measured
+(D) A sample that represents the population of interest
+
+\needspace{7\baselineskip}
+**22.** In Fisher's tea experiment with eight cups, four of each kind, what is the probability of picking all four milk-first cups by guessing?
+
+(A) 1/16
+(B) 1/8
+(C) 1/256
+(D) 1/70
+
+\needspace{7\baselineskip}
+**23.** In that experiment, what is the probability of getting at least three of the four right by guessing?
+
+(A) 1/70
+(B) 17/70
+(C) 16/70
+(D) 4/70
+
+\needspace{7\baselineskip}
+**24.** In Fisher's test, where does the reference distribution come from?
+
+(A) An assumption that the taster's answers are normally distributed
+(B) Data on how well tasters did in earlier experiments
+(C) The design: the random order in which the cups were presented
+(D) The central limit theorem, given a large number of cups
+
+\needspace{7\baselineskip}
+**25.** Why does @Fisher1935 consider eight cups and not six?
+
+(A) With six, the order of the cups could not be randomized
+(B) With six, the experiment would take too little time
+(C) With six, a perfect score happens by chance 1 time in 20
+(D) With six, the taster could not be asked to divide them equally
+
+\needspace{7\baselineskip}
+**26.** People who drop out of the treatment group differ from those who drop out of the control group. This is mainly a threat to:
+
+(A) Informed consent
+(B) External validity
+(C) Equipoise
+(D) Internal validity
+
+\needspace{7\baselineskip}
+**27.** An experiment on undergraduates at one university finds a large effect. Whether that holds for adults in general is a question of:
+
+(A) Compliance
+(B) External validity
+(C) Internal validity
+(D) Reliability
+
+\needspace{7\baselineskip}
+**28.** What was the central ethical failure of the Tuskegee Syphilis Study, as discussed in @Alexander2023?
+
+(A) The men were not told, and were denied treatment
+(B) The men were assigned to their groups without randomization
+(C) The results were not published for other researchers to use
+(D) The sample was too small for any conclusion to be reached
+
+\needspace{7\baselineskip}
+**29.** What does equipoise require before we randomize?
+
+(A) That participants cannot tell which arm they are in
+(B) That both arms have the same number of participants
+(C) That we genuinely do not know which arm is better
+(D) That the experiment has been approved by a funder
+
+\needspace{7\baselineskip}
+**30.** What made the Oregon Health Insurance Experiment possible?
+
+(A) Researchers persuaded the state to deny coverage to a control group
+(B) Two similar counties adopted different policies by chance
+(C) Participants volunteered to go without insurance for a year
+(D) Limited funds meant that coverage was allocated by lottery
+
+\needspace{7\baselineskip}
+**31.** According to @Salganik2018, which three concepts help us move beyond simple experiments?
+
+(A) Randomization, replication of results, and pre-registration
+(B) Informed consent, equipoise, and debriefing of participants
+(C) Validity, heterogeneity of treatment effects, and mechanisms
+(D) Statistical power, significance, and the size of effects
+
+\needspace{7\baselineskip}
+**32.** @Salganik2018 suggests building ethics into the design of an experiment with three Rs. What are they?
+
+(A) Replace, refine, and reduce
+(B) Review, revise, and resubmit
+(C) Recruit, reward, and release
+(D) Randomize, replicate, and report
+
+\needspace{7\baselineskip}
+**33.** With millions of users in an A/B test, almost any difference is statistically significant. What question matters more?
+
+(A) Whether the effect is large enough to matter
+(B) Whether the test was run for an entire year
+(C) Whether the p-value is below 0.01, not just 0.05
+(D) Whether the sample could be made larger still
+
+\needspace{7\baselineskip}
+**34.** "How satisfied are you with the cost and quality of your housing?" What is wrong with this question?
+
+(A) It is open: there are no options for the respondent
+(B) It demands recall that the respondent does not have
+(C) It is double-barreled: it asks about two things at once
+(D) It is leading: it pushes the respondent toward one answer
+
+\needspace{7\baselineskip}
+**35.** What does @Alexander2023 say about a survey for which there is no time or budget to test?
+
+(A) Reconsider whether the survey should be done at all
+(B) Run it anyway, and report that it was not tested
+(C) Test it on yourself, which is usually sufficient
+(D) Shorten it until testing is no longer necessary
+
+\needspace{7\baselineskip}
+**36.** Survey platforms such as Qualtrics and Google Forms mainly solve which problem?
+
+(A) Finding a sampling frame
+(B) Building and sending the form
+(C) Reducing non-response
+(D) Weighting the responses
+
+\needspace{7\baselineskip}
+**37.** A survey has a response rate of eight per cent. When does that bias the estimate?
+
+(A) Never, provided that the original sample was drawn at random
+(B) Only when the survey was conducted over the internet
+(C) Always, because any rate below fifty per cent gives biased estimates
+(D) When those who respond differ, on the outcome, from those who do not
+
+\needspace{7\baselineskip}
+**38.** What can weighting a survey to census totals fix?
+
+(A) Imbalance on any variable, whether or not we observe it
+(B) A sampling frame that left out part of the population
+(C) Measurement error in the answers that respondents gave
+(D) Imbalance on variables that we observe and have totals for
+
+\newpage
+
+# Short answer (5 questions)
+
+A few sentences each. Write in the space provided.
+
+\needspace{6cm}
+**S1.** List four things that you would do to scrape a website respectfully, and say who each one protects.
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S2.** Before parsing a table from an old PDF, the demonstration simulated the dataset that was expected. Give two tests that came from the simulation and one that came from the table itself. Why is the last kind especially valuable?
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S3.** In Fisher's experiment the taster is told that there are four cups of each kind. Suppose we did not tell her, and she could call any number of the eight cups "milk first". How many possible sets of answers are there, and what is the probability that she gets all eight right by guessing? Why might Fisher have preferred his design?
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S4.** A firm runs an A/B test on a gambling website to see which of two layouts leads people to deposit more money. Give two ways in which this differs, ethically, from a field experiment run by a university researcher.
+
+\vspace{5cm}
+
+\needspace{6cm}
+**S5.** For your Assignment II: if you chose Howrah, state the population, frame, and sample of your survey and how non-response is handled. If you chose Dysart, state whether your PDF has a text layer, what a row of your dataset will be, and one check that the table itself provides.
+
+\vspace{5cm}
+
+\newpage
+
+# References

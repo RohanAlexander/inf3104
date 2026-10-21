@@ -1,0 +1,209 @@
+---
+title: "Clean, test, store, and share"
+author: "Rohan Alexander"
+date: "2026-10-23"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  revealjs:
+    slide-number: "c/t"
+    show-slide-number: all
+---
+
+# This week
+
+## Plan
+
+- Quiz 4: Week 6 readings and class
+- Classic paper 4: Wickham (2014), "Tidy Data"
+- Lecture: cleaning and testing; storing and sharing
+- Lecture: data organization, documentation, and style, following Lewis
+- Demonstration: clean what the API gave us last week, with the tests written first; a data dictionary and the first page of a datasheet
+- Team time for Assignment II
+
+::: {.notes}
+- Last week ended with 500 rows from the Open Data Toronto API in which every column, including the counts, was a character. We had the data. We did not have a dataset. This week is about getting from one to the other in a way that someone else can check, and then handing it over so that someone else can use it.
+- The readings are Chapters 9 and 10 of @Alexander2023; Chapters 3, 4, 5, and 9 of @Lewis2024; @Gebru2021; @Wilkinson2016; the Quartz guide to bad data [@QuartzBadData]; and @Wickham2014.
+- There are two decks today. This one follows the two chapters of @Alexander2023. The second is drawn from @Lewis2024.
+:::
+
+# Clean and prepare
+
+## Cleaning is not a chore before the analysis
+
+- It is where many of the decisions that determine the result get made.
+- Every one of them is a judgement, and every one should be visible to a reader.
+- So we do it in code, in order, from the raw data, and never by hand.
+
+::: {.notes}
+- People say that most of the time in any analysis goes on cleaning, usually as a complaint. I would put it differently. Cleaning is when you find out what the data are. You cannot decide what to do with the value -99 in an age column, or with two spellings of one shelter, without learning something about how the data came to be.
+- These decisions move results. Two careful people will decide differently about which rows are dropped because something is missing, how categories are merged, and what counts as an outlier, and they will get different answers. A reader can only judge that if they can see it, and they can only see it if it is in a script that runs from the raw data to the analysis data.
+- This is why we never edit the raw data, and never clean in a spreadsheet. There is no record.
+:::
+
+## The workflow
+
+1. Save the original, unedited data.
+2. Plan: sketch and simulate the dataset that you want to end up with.
+3. Start small: get a slice right.
+4. Write tests and documentation.
+5. Iterate, generalize, and update.
+
+::: {.notes}
+- This is Section 9.2 of @Alexander2023, and you have now seen it three times in the demonstrations.
+- Save the original. It goes in its own folder, and nothing ever writes to that folder again.
+- Plan an endpoint. Decide what a row is, what the columns are, what type each is, and what values each can take. If you can simulate it then you understand it well enough to start. And the simulation gives you the tests, before the real data have had a chance to talk you out of them.
+- Start small. Get it working on the first thousand rows, or one year, or one page of the PDF. It is quick, and you find most of the problems.
+- Then generalize, and expect the tests to fail as you do, because the rest of the data will contain things that the slice did not. That is the tests working.
+:::
+
+## What goes wrong
+
+- Types: numbers stored as text; dates as text, in more than one format; identifiers stored as numbers, and so losing leading zeros.
+- Values: "N/A", "-", "", 0, 999, and -99 all meaning missing; units that change part way; typos in categories.
+- Structure: totals mixed in with rows; merged header cells; one thing per column violated.
+- Duplicates, and things that should be duplicated but are not.
+
+::: {.notes}
+- The Quartz guide [@QuartzBadData] is a catalog of these, organized by who is in a position to fix each one. Read it once in full and then keep it nearby.
+- Some favorites from it. A spreadsheet with exactly 65,536 rows, which was the limit in old versions of Excel, and so the rest are gone. Dates of 1900 or 1970, which are what zero looks like as a date. Zeros where there should be missing values. Text that has been garbled by an encoding problem.
+- Zero is not missing. Missing is not zero. Much of the damage in cleaning comes from confusing them, in both directions.
+:::
+
+## Tidy data
+
+- Each variable is a column.
+- Each observation is a row.
+- Each type of observational unit is a table.
+
+::: {.notes}
+- This is @Wickham2014, which is today's classic paper, so I will be brief.
+- The benefit is that there is a standard structure that tools can assume. The messy forms that Wickham lists are all things that you will meet. They include column headers that are values (a column for each year), several variables in one column ("m_25_34"), and variables in both rows and columns.
+- It is a statement about structure. It says nothing about whether the values are right. A dataset can be perfectly tidy and wrong. And it is sometimes the wrong structure for a person to read, which is why tables in papers are usually wide.
+- Lewis, in the second deck, comes at the same ideas from the point of view of someone managing data for a large project.
+:::
+
+## Checking: look at it
+
+- Graphs: a histogram of every numeric variable; a bar chart of every categorical one; everything against time.
+- Counts: how many of each value? How many missing? How many rows before and after each step?
+
+::: {.notes}
+- These are for you, while you work, and they are quick. They are how you find out what the tests should be.
+- A histogram of ages with a spike at 99, or at 0. A count of provinces that comes back with fourteen. A plot of daily counts with a gap in March.
+- Count rows before and after every join and every filter. A join that silently multiplies rows is one of the most common serious errors that I see, and it produces no warning.
+:::
+
+## Testing: write it down
+
+- A test is a statement about the dataset that is either true or false, and that the computer checks every time.
+- At a minimum, for every variable:
+    - class: is it the type that it should be?
+    - content: are its values ones that it could take?
+- Then uniqueness of identifiers, missingness, and relationships between variables.
+
+::: {.notes}
+- The difference between a check and a test is that a test is written down and re-run. You looked at the histogram once, in October. The test runs every time that the data are updated, including when you are not looking. If you did Week 1's assignment then your data change every day.
+- Class and content for each variable is the minimum that the Dysart rubric asks for.
+- Relationships between variables are the most valuable tests, because they encode something that you know about the world. For instance, an end date is not before a start date, occupied beds are not more than beds, and components add to their total. Last week's total fertility rate test was one of these.
+- In Python a plain `assert` goes a long way. `pointblank` exists for both R and Python if you would like a report. In R there is also `testthat` and `validate`.
+:::
+
+## What to do when a test fails
+
+- Find out why. Go back to the source.
+- Then either fix the data, in code, with a comment that says why, or fix the test, because you were wrong about the world.
+- Do not delete the row to make the test pass.
+
+::: {.notes}
+- A failing test is the most informative thing that happens during cleaning. It means that either the data or your understanding is wrong, and you need to find out which.
+- If you decide to exclude observations, then that is a decision, and it goes in the paper. Say how many, which ones, and why.
+:::
+
+## Names
+
+- Machine-readable: no spaces, no special characters, lower case, consistent. `janitor::clean_names()`, or the polars equivalent, first.
+- Human-readable: a name that someone else, including you in six months, would guess the meaning of.
+- Put the units in the name, so `income_weekly_cad` rather than `income`.
+- Be consistent. If one is `date_start` then the other is `date_end`, not `finish_dt`.
+
+::: {.notes}
+- Names are the interface to your dataset. They are the first documentation that anyone reads, and the only documentation that many people will read.
+- This is where this deck hands over to the Lewis deck, which has a great deal more on naming files, folders, and variables.
+:::
+
+# Store and share
+
+## Why share
+
+- So that others can check what we did. That is what makes the work credible.
+- So that others can build on it. Data are expensive, and most datasets are used once.
+- Because someone usually paid for them, and often that was the public.
+
+::: {.notes}
+- Part 1 of the course was about making the analysis reproducible. None of it matters if nobody else can get the data.
+- It is also self-interest. The person most likely to need your data, documented and in a sensible format, is you, in two years.
+:::
+
+## FAIR
+
+- Findable: it has a persistent identifier and metadata, and it is indexed somewhere that people search.
+- Accessible: it can be retrieved by a standard, open protocol. Not necessarily open to all, but it is clear how access works.
+- Interoperable: open formats and shared vocabularies.
+- Reusable: a licence, provenance, and enough documentation to use it properly.
+
+::: {.notes}
+- These are from @Wilkinson2016. They are written with machines in mind as much as people.
+- In practice there is a ladder. The first rung, and the most important, is getting the data off your own computer. A public GitHub repo does that. The second is depositing them somewhere that will outlive your repo and give them a DOI, such as Zenodo, the Open Science Framework, or the U of T Dataverse in Borealis. The third is wrapping them in a package or an API so that people can get them without involving you.
+- FAIR is not the same as open. Data about people often cannot be open, and can still be FAIR, because the metadata are public, and there is a documented way to apply for access.
+:::
+
+## Documentation
+
+- A data dictionary, or codebook: for every variable, its name, a description, the type, the units, and the allowed values.
+- A datasheet: the context. Why was the dataset made, by whom, and how? Who is in it, and who is not? What should it not be used for?
+- A README that says what is where.
+
+::: {.notes}
+- @Gebru2021 propose datasheets by analogy with the datasheet that comes with an electronic component, which says what it is for, its operating characteristics, and the conditions under which it will fail. The questions are grouped into motivation; composition; collection process; preprocessing, cleaning, and labeling; uses; distribution; and maintenance.
+- Many of those questions are the ones that we have been asking for three weeks. What was measured, and with what instrument? What is the population, and what was the sampling strategy? Did the people involved consent? What cleaning was done, and are the raw data available? A datasheet is where the answers go so that they travel with the data.
+- The Dysart paper requires one, as an appendix. It is worth doing properly. Answer each question for your dataset, and say so plainly when the answer is that you do not know.
+:::
+
+## Personally identifying information
+
+- We want to share as widely as possible, and we must respect the people in the data. These pull against each other.
+- Names and identity numbers are obviously identifying. Combinations are less obviously so. A postcode, a date of birth, and a gender will pick out most people.
+- Options: do not collect it; do not disclose it; aggregate; hash identifiers; release simulated data; differential privacy.
+
+::: {.notes}
+- Removing the name column does not anonymize a dataset. Re-identification works by linking what is left to something else that has names on it.
+- Hashing replaces an identifier with a code that cannot be reversed, so that records can still be linked without revealing the identifier. It fails if someone can hash every possible input and compare, which for something like a phone number they can. So add a salt, and keep it secret.
+- Releasing a simulated dataset that has the same structure as the real one, with code that runs on it, is often a good compromise. Others can see exactly what you did and run it, and then apply for access to the real data to confirm the numbers.
+- Differential privacy adds calibrated noise so that the presence or absence of any one person makes almost no difference to what is released. The US Census Bureau used it for the 2020 census. The cost is accuracy, and it falls hardest on small groups and small places, which are often the ones that the data were meant to serve. It is a trade-off, and someone decides it.
+- The judgement in @Alexander2023 is that this is about costs and benefits, and "reasonable" protection. But it is other people's cost. If in doubt, do not release, and ask.
+:::
+
+## Formats and efficiency
+
+- CSV: everyone can open it. But it has no types, it is large, and it is slow.
+- Parquet: typed, compressed, columnar, and readable from R and Python alike.
+- When data get larger than memory, use Arrow or DuckDB, and do the filtering before the loading.
+
+::: {.notes}
+- We have used Parquet since Week 1, so this is a reminder of why. A CSV forgets that a column was a date or an integer, and every person who reads it has to guess again. Last week's API had the same problem. Parquet keeps the schema with the data.
+- For sharing with people who may not have the tools, a CSV alongside the Parquet file costs little.
+:::
+
+# Conclusion
+
+## Conclusion
+
+- Raw data are never edited. Everything between raw and analysis data is code.
+- Simulate the endpoint, and get the tests from the simulation.
+- Test class and content for every variable, and then what you know about how variables relate.
+- A failing test is information. Find out why.
+- Get the data off your computer, with a dictionary, a datasheet, and a licence.
+- Respect for the people in the data comes before reproducibility.
+
+# References

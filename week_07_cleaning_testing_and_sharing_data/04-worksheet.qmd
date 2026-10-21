@@ -1,0 +1,87 @@
+---
+title: "Worksheet"
+author: "Rohan Alexander"
+date: "2026-10-23"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+# Bad data
+
+1. Below are the first rows of a file that you have been sent. List everything that you would need to fix, or ask about, before you could use it. There are at least ten. For each, say which section of the Quartz guide [@QuartzBadData] or which rule in Chapter 3 of @Lewis2024 it falls under.
+
+| ID | Name | DOB | Date of visit | Weight | Smoker? | Notes |
+|---|---|---|---|---|---|---|
+| 001 | Tran, Mai | 03/04/1985 | 2026-01-12 | 61.5 | N | |
+| 2 | John SMITH | 1979-11-30 | 12/01/2026 | 180 | no | weight in lbs |
+| 3 | A. Okafor | 14/02/1990 | 2026-01-13 | 0 | Y | refused weigh-in |
+| 3 | A. Okafor | 14/02/1990 | 2026-01-13 | 0 | Y | refused weigh-in |
+| 5 | Lee, Sam | 1900-01-01 | Jan 13 | 72,4 | sometimes | |
+| | | | | 78.5 | | average |
+
+\vspace{8cm}
+
+2. Sketch the dataset, or datasets, that you would want to end up with. Include the tables, what a row is in each, the variable names, and the type of each variable.
+
+\newpage
+
+# Tests
+
+Work from `03-demo.qmd`.
+
+3. The tests passed on five nights in September 2026. Change `scripts/01-api.py` from Week 6 so that it gets 5,000 rows from the 2021 file instead, save them to `data/raw/`, and run the cleaning script on them. Before you run it, write down which tests you expect to fail, if any. Then write down what happened.
+
+\vspace{5cm}
+
+4. For each test that failed, were the data wrong, or was the test wrong about the world? How did you find out? What did you change, and what would you write in the data section of a paper about it?
+
+\vspace{5cm}
+
+5. Add three tests of your own. At least one must be about a relationship between variables or between rows, for instance something that should be true of one program from one night to the next.
+
+\vspace{4cm}
+
+6. `scripts/tests.py` uses plain `assert` statements. Rewrite the class and content tests for three variables using `pointblank`, in Python or R. What do you gain, and what does it cost?
+
+\newpage
+
+# Tidy data
+
+These questions are about @Wickham2014.
+
+7. Wickham lists five common ways in which datasets are messy. Which of them describes the bed and room columns in the raw shelter data? Which describes the DHS fertility table from last week, as it was printed?
+
+\vspace{4cm}
+
+8. Give an example of a table that is better for a reader when it is not tidy, and say why.
+
+\vspace{4cm}
+
+# Sharing
+
+9. A colleague has survey responses from 300 students in one faculty, with age in years, program, year of study, the first three characters of their home postcode, and their answers. They have removed names and student numbers and would like to post them on GitHub alongside their paper. What would you advise, and what are the options?
+
+\vspace{5cm}
+
+10. They hash the student numbers with SHA-256 so that the responses can be linked to a second survey. Student numbers are ten digits. Why is that not enough, and what would make it better?
+
+\newpage
+
+# Your dataset
+
+In your Assignment II team.
+
+11. Write the data dictionary for the dataset that you are building (Dysart) or the variables that you are using (Howrah), with name, description, type, units, and allowed values.
+
+\vspace{7cm}
+
+12. Pick the five questions from @Gebru2021 that you expect to be hardest to answer for your dataset. Write down what you would need to find out to answer them, and where you would look.
+
+\vspace{6cm}
+
+13. Sketch the folder layout of your repo, and name the files, following Chapter 9 of @Lewis2024. Where do the raw data go? Which files could someone delete and then regenerate by running your code?
+
+\newpage
+
+# References

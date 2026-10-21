@@ -1,0 +1,9 @@
+variable,description,type,units,allowed_values
+occupancy_date,Night to which the row refers.,date,,2021-01-01 onwards
+program_id,"City of Toronto identifier for the shelter program. An identifier, not a quantity.",string,,Five digits
+sector,Group the program serves.,string,,"Families, Men, Mixed Adult, Women, Youth"
+capacity_unit,Whether the program's capacity is counted in beds or in rooms.,string,,"bed, room"
+service_users,Number of people staying in the program that night.,integer,people,0 or more
+capacity,Number of beds or rooms (see capacity_unit) available that night.,integer,beds or rooms,1 or more
+occupied,Number of beds or rooms occupied that night.,integer,beds or rooms,0 to capacity
+occupancy_rate,occupied as a percentage of capacity.,float,per cent,0 to 100

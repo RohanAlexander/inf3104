@@ -1,0 +1,10 @@
+[project]
+name = "week-7"
+version = "0.1.0"
+description = "Week 7: clean, test, and document the shelter rows from the Week 6 API demonstration"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.3.2",
+    "polars>=1.33.0",
+]
