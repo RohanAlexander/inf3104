@@ -152,7 +152,6 @@ https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=dai
 - A web page is HTML, which is nested tags such as `<table>`, `<tr>`, `<td>`, `<a href="...">`.
 - We download the page, parse it into a tree, and select the nodes we want, usually with CSS selectors.
 - Python: `requests` and `beautifulsoup4`. R: `rvest`.
-- Then the cleaning starts.
 
 ::: {.notes}
 - Use the browser's "Inspect" tool to find what identifies the thing that you want, which could be a tag, a class, or an id.
@@ -174,7 +173,7 @@ https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=dai
 - The Dysart paper is this task, with DHS final reports from the 1980s and 1990s. Some were typeset on a computer and contain text. Many are scans.
 :::
 
-## OCR makes errors, and they are not random
+## OCR makes errors...
 
 - 1 and l and I; 0 and O; 5 and S; 8 and 3.
 - A decimal point that vanishes turns 4.7 into 47.
@@ -203,10 +202,10 @@ https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=dai
 
 ## The lady tasting tea
 
-- A colleague claims she can tell whether the milk or the tea went into the cup first.
-- Eight cups, four of each, presented in random order. She knows this, and picks the four that she thinks were milk-first.
+- A colleague (actually my Dad) claims he can tell whether the milk or the tea went into the cup first.
+- Eight cups, four of each, presented in random order. He knows this, and picks the four that he thinks were milk-first.
 - There are $\binom{8}{4} = 70$ ways to choose four cups from eight.
-- If she cannot tell, the chance of getting all four right is 1/70, about 1.4 per cent.
+- If he cannot tell, the chance of getting all four right is 1/70, about 1.4 per cent.
 
 ::: {.notes}
 - This is Chapter 2 of @Fisher1935, and we will do it in the worksheet.
@@ -269,9 +268,9 @@ https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=dai
 ## Surveys
 
 - Having decided what to measure, a survey is a common way to get values.
-- Three eras: face-to-face, telephone, internet.
+- Three eras: face-to-face, telephone, internet. (And now a nascent fourth!)
 - Each changed who could be reached, what it cost, and who responds.
-- Platforms solve the form. They do not solve the frame.
+- Platforms solve the form but they do not do much in terms of the appropriateness of the sampling frame.
 
 ::: {.notes}
 - Face-to-face and telephone surveys have interviewer effects, where people answer differently depending on who is asking. The internet removed the interviewer and brought very low participation rates.
@@ -295,9 +294,9 @@ https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=dai
 
 ## Test it
 
-- There is no occasion on which a pilot will not improve a survey.
+- There is (almost) no occasion on which a pilot will not improve a survey.
 - Watch someone fill it in. Ask them what they thought each question meant.
-- If there is no time or money to test the survey, reconsider whether to run it.
+- Honestly, if there is no time or money to test the survey, reconsider whether to run it.
 
 ::: {.notes}
 - That last line is from @Alexander2023 and I mean it. A survey that has not been tested has not been designed.
@@ -306,8 +305,7 @@ https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/package_show?id=dai
 
 ## Non-response
 
-- Unit non-response: the person does not take part. Item non-response: they skip a question.
-- Neither is random.
+- Unit non-response: the person does not take part. Item non-response: they skip a question. The issue, from a statistical perspective, is that neither is random.
 - Weighting adjusts for who responded, on the variables that we observe and have population totals for.
 - It cannot fix differences on things that we do not observe.
 

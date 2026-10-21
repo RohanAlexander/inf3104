@@ -1347,7 +1347,6 @@ display:block!important;
 <li>A web page is HTML, which is nested tags such as <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;a href=&quot;...&quot;&gt;</code>.</li>
 <li>We download the page, parse it into a tree, and select the nodes we want, usually with CSS selectors.</li>
 <li>Python: <code>requests</code> and <code>beautifulsoup4</code>. R: <code>rvest</code>.</li>
-<li>Then the cleaning starts.</li>
 </ul>
 <aside class="notes">
 <ul>
@@ -1399,8 +1398,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="ocr-makes-errors-and-they-are-not-random" class="slide level2">
-<h2>OCR makes errors, and they are not random</h2>
+<section id="ocr-makes-errors" class="slide level2">
+<h2>OCR makes errors…</h2>
 <ul>
 <li>1 and l and I; 0 and O; 5 and S; 8 and 3.</li>
 <li>A decimal point that vanishes turns 4.7 into 47.</li>
@@ -1458,10 +1457,10 @@ display:block!important;
 <section id="the-lady-tasting-tea" class="slide level2">
 <h2>The lady tasting tea</h2>
 <ul>
-<li>A colleague claims she can tell whether the milk or the tea went into the cup first.</li>
-<li>Eight cups, four of each, presented in random order. She knows this, and picks the four that she thinks were milk-first.</li>
+<li>A colleague (actually my Dad) claims he can tell whether the milk or the tea went into the cup first.</li>
+<li>Eight cups, four of each, presented in random order. He knows this, and picks the four that he thinks were milk-first.</li>
 <li>There are <span class="math inline">\(\binom{8}{4} = 70\)</span> ways to choose four cups from eight.</li>
-<li>If she cannot tell, the chance of getting all four right is 1/70, about 1.4 per cent.</li>
+<li>If he cannot tell, the chance of getting all four right is 1/70, about 1.4 per cent.</li>
 </ul>
 <aside class="notes">
 <ul>
@@ -1596,9 +1595,9 @@ display:block!important;
 <h2>Surveys</h2>
 <ul>
 <li>Having decided what to measure, a survey is a common way to get values.</li>
-<li>Three eras: face-to-face, telephone, internet.</li>
+<li>Three eras: face-to-face, telephone, internet. (And now a nascent fourth!)</li>
 <li>Each changed who could be reached, what it cost, and who responds.</li>
-<li>Platforms solve the form. They do not solve the frame.</li>
+<li>Platforms solve the form but they do not do much in terms of the appropriateness of the sampling frame.</li>
 </ul>
 <aside class="notes">
 <ul>
@@ -1648,9 +1647,9 @@ display:block!important;
 <section id="test-it" class="slide level2">
 <h2>Test it</h2>
 <ul>
-<li>There is no occasion on which a pilot will not improve a survey.</li>
+<li>There is (almost) no occasion on which a pilot will not improve a survey.</li>
 <li>Watch someone fill it in. Ask them what they thought each question meant.</li>
-<li>If there is no time or money to test the survey, reconsider whether to run it.</li>
+<li>Honestly, if there is no time or money to test the survey, reconsider whether to run it.</li>
 </ul>
 <aside class="notes">
 <ul>
@@ -1672,8 +1671,7 @@ display:block!important;
 <section id="non-response" class="slide level2">
 <h2>Non-response</h2>
 <ul>
-<li>Unit non-response: the person does not take part. Item non-response: they skip a question.</li>
-<li>Neither is random.</li>
+<li>Unit non-response: the person does not take part. Item non-response: they skip a question. The issue, from a statistical perspective, is that neither is random.</li>
 <li>Weighting adjusts for who responded, on the variables that we observe and have population totals for.</li>
 <li>It cannot fix differences on things that we do not observe.</li>
 </ul>

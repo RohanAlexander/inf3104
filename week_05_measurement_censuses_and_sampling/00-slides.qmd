@@ -10,23 +10,6 @@ format:
     show-slide-number: all
 ---
 
-# This week
-
-## Plan
-
-- Defences of the Donaldson paper
-- Classic papers: Donoho (2017), and Neyman (1934), Sections I, III, and V
-- Lecture: measurement, censuses, and sampling
-- Demonstration: simulate a population, sample it five ways, compare
-- Worksheet: population, frame, and sample for three real surveys; what Bowley could and could not claim
-- Assignment II: form teams, pick Howrah or Dysart
-
-::: {.notes}
-- Part 1 was about workflow, which is how to work so that someone else can trust, and re-run, what you did. Part 2 is about the data themselves. That is, where they come from, what they measure, who is in them, and who is not.
-- The readings are Chapter 6 of @Alexander2023, Chapter 9 of @statcanhistory, @bowley1913working, and Sections I, III, and V of @neyman1934two.
-- Both Assignment II options need this week. Howrah asks you to take apart a survey's methodology, which means its population, frame, sample, recruitment, and non-response. Dysart asks you to rebuild a dataset from a DHS report, and the DHS is a stratified two-stage cluster sample.
-:::
-
 ## Introduction
 
 - Turning our complex world into usable data is challenging.
@@ -153,10 +136,10 @@ format:
 
 - Data we know we do not have.
 - Can occur due to non-response or incomplete information.
-- Important to consider types:
-  - **Missing Completely At Random (MCAR)**
-  - **Missing At Random (MAR)**
-  - **Missing Not At Random (MNAR)**
+- Some types:
+  - Missing Completely At Random (MCAR)
+  - Missing At Random (MAR)
+  - Missing Not At Random (MNAR)
 
 ::: {.notes}
 - Regardless of how good our data acquisition process is, there will be missing data. That is, observations that we know we do not have. 
