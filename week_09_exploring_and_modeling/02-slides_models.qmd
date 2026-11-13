@@ -1,0 +1,258 @@
+---
+title: "Linear and generalized linear models"
+author: "Rohan Alexander"
+date: "2026-11-13"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  revealjs:
+    slide-number: "c/t"
+    show-slide-number: all
+  pdf: default
+---
+
+# Simple linear regression
+
+## The model
+
+$$Y = \beta_0 + \beta_1 X + \epsilon$$
+
+- $\beta_0$: the expected value of $Y$ when $X$ is zero
+- $\beta_1$: the difference in the expected value of $Y$ for a one-unit difference in $X$
+- $\epsilon$: noise, and it is this that we assume is Normal
+- So $Y \sim \mbox{Normal}(\beta_0 + \beta_1 X, \sigma)$
+
+::: {.notes}
+- When we are interested in the relationship between a continuous outcome and a predictor we can use simple linear regression. It is based on the Normal distribution, but it is not the variables themselves that are assumed to be normally distributed. It is the noise.
+- There are two coefficients, the intercept and the slope. We take this relationship to the data to estimate them.
+- Underpinning this is a belief that there is some "true" relationship between $X$ and $Y$ and that it is linear. We cannot know the true relationship. We use a sample to estimate it, and a different sample would give slightly different estimates.
+:::
+
+## An example where we know the answer
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9
+#| fig-height: 4.5
+
+library(tidyverse)
+
+set.seed(853)
+
+sim_run <-
+  tibble(
+    five_km = runif(n = 200, min = 15, max = 30),
+    marathon = 8.4 * five_km + rnorm(n = 200, mean = 0, sd = 20)
+  )
+
+sim_run |>
+  ggplot(aes(x = five_km, y = marathon)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, colour = "black", formula = y ~ x) +
+  labs(x = "Five-kilometer time (minutes)", y = "Marathon time (minutes)") +
+  theme_classic(base_size = 16)
+```
+
+
+
+## Which line?
+
+- Many lines could be drawn. Which is "best"?
+- For any candidate line, the residual is $e_i = y_i - \hat{y}_i$
+- Least squares: choose $\hat\beta_0$ and $\hat\beta_1$ to minimize $\mbox{RSS} = e_1^2 + e_2^2 + \dots + e_n^2$
+- In use since the 1700s, first in astronomy
+
+## Fitting it
+
+```{r}
+#| echo: true
+
+sim_run_model <- lm(marathon ~ five_km, data = sim_run)
+
+broom::tidy(sim_run_model) |>
+  select(term, estimate, std.error)
+```
+
+- Truth: intercept 0, slope 8.4
+
+## The intercept
+
+- The expected marathon time for someone who runs five kilometers in zero minutes
+- Here the estimate is about 4.6. The truth is 0. Nobody in the data is near zero
+- Center the predictor and the intercept becomes the expected outcome at the average
+- The slope does not change
+
+## Comparisons rather than effects
+
+- "When we compare people in our dataset whose five-kilometer times differ by one minute, their marathon times differ by about eight minutes, on average"
+- Not: "running five kilometers one minute faster makes your marathon eight minutes faster"
+- A coefficient compares different units. It does not describe a change within one unit
+
+## Standard errors and intervals
+
+- A different sample would give a different estimate and the standard error is about estimating how different it oculd be
+- It decreases as $n$ increases
+- A 95 per cent interval is roughly $\hat\beta_1 \pm 2 \times \mbox{SE}(\hat\beta_1)$
+- The 95 per cent is a property of the procedure over many repetitions, under many assumptions
+
+
+## p-values
+
+- A specific and subtle concept!
+- A p-value carries every assumption in the workflow, including how the data were gathered and cleaned
+- It may be small because the null is false, or because something upstream went wrong
+
+
+
+# Multiple linear regression
+
+## More than one predictor
+
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \epsilon$$
+
+- Each coefficient is a comparison between units that differ in that predictor and are the same in the others
+- Different from running separate regressions, especially when predictors are correlated
+- `lm(marathon ~ five_km + was_raining, data = sim_run_data)`
+
+
+## Predictors that are not continuous
+
+- Two values: a binary variable, 0 or 1. The coefficient is the difference between the groups
+- More than two: a set of binary variables, with one category as the baseline in the intercept
+- R does this for a character or a factor. You need to know which category is the baseline
+- In the book's example, rain adds about ten minutes, because that is what was simulated
+
+
+## Interactions
+
+- Does the comparison for one predictor depend on the level of another?
+- `lm(marathon ~ five_km + was_raining * humidity)`
+- `*` includes both main terms and their product
+- Once there is an interaction, no single coefficient answers "what is the difference for rain?"
+
+
+# Which assumptions matter
+
+## The usual list
+
+1. Linearity of the predictors
+2. Homoscedasticity of errors
+3. Independence of errors
+4. Outliers and other high-impact observations
+
+Graphs and a few sentences are usually enough to address these.
+
+(But what actually matters?)
+
+- The most important threat to validity is whether the model is directly relevant to the research question
+- Does the outcome measure what you claim? Do the data represent who you claim?
+
+
+## Not on the list
+
+- The outcome does not need to be Normal
+- The predictors do not need to be Normal
+- $R^2$ does not need to be high
+- The coefficients do not need to be "significant"
+
+::: {.notes}
+- These four come up every year.
+- It is the errors that are modeled as Normal, rather than the variables. In the running example the predictor is uniform.
+- $R^2$ says how much of the variation in the outcome the model accounts for. If the goal is prediction, that matters. If the goal is to estimate a comparison, a model can have a low $R^2$ and a well-estimated coefficient. People vary a lot. That is not a flaw in the model.
+- A coefficient with an interval that includes zero is a finding. Report it. A paper that only reports models in which everything has a star has usually been through a search that invalidates the stars.
+:::
+
+# Generalized linear models
+
+## One idea
+
+- Linear regression assumes a continuous outcome that can be any real number
+- A binary outcome is not that. A count is not that
+- Keep the linear predictor: $\beta_0 + \beta_1 x_1 + \dots$
+- Change two things, the distribution of the outcome and the link between its mean and the linear predictor
+
+
+## Three models, one table {.smaller}
+
+| | Linear | Logistic | Poisson |
+|:--|:--|:--|:--|
+| Outcome | continuous | 0 or 1 | count |
+| Distribution | Normal($\mu_i$, $\sigma$) | Bernoulli($\pi_i$) | Poisson($\lambda_i$) |
+| Link | identity: $\mu_i$ | logit: $\log\left(\frac{\pi_i}{1-\pi_i}\right)$ | log: $\log(\lambda_i)$ |
+| Equals | $\beta_0 + \beta_1 x_i$ | $\beta_0 + \beta_1 x_i$ | $\beta_0 + \beta_1 x_i$ |
+| In R | `lm()` | `glm()`, `binomial` | `glm()`, `poisson` |
+| Coefficient: a difference in | the outcome | log-odds | log expected count |
+
+
+
+## Logistic regression
+
+```{r}
+#| echo: false
+#| fig-width: 9
+#| fig-height: 4
+
+tibble(p = seq(0.005, 0.995, by = 0.005)) |>
+  mutate(logit = qlogis(p)) |>
+  ggplot(aes(x = p, y = logit)) +
+  geom_line() +
+  labs(x = "Probability", y = "logit(probability)") +
+  theme_classic(base_size = 16)
+```
+
+- logit(0.1) = -2.2, logit(0.5) = 0, logit(0.9) = 2.2
+
+
+
+## A logistic coefficient
+
+- The book's example is whether it is a weekday, given the number of cars on the road
+- The coefficient on cars is 0.19
+- One more car is associated with a difference of 0.19 in the log-odds of a weekday
+- The difference in probability that this implies depends on where you start
+
+
+
+## Ask the model rather than the coefficient
+
+- A fitted model takes values of the predictors and returns an expected outcome
+- So ask it for expected outcomes, and compare them, in the units of the outcome
+- In the shelter model from the demonstration, the coefficient on a transitional program is about -1.5
+- Averaged over the 123 programs, that is a probability of being full about 31 percentage points lower than for an emergency program, with a 95 per cent interval from 13 to 49 points
+
+
+## Poisson regression
+
+- For counts: 0, 1, 2, ...
+- One parameter, $\lambda$, which is both the mean and the variance
+- Log link, so that $\lambda_i$ is positive: $\log(\lambda_i) = \beta_0 + \beta_1 x_i$
+- A coefficient is a difference in the log of the expected count, so $e^{\beta}$ is a ratio
+
+## Negative binomial regression
+
+- Poisson forces the variance to equal the mean. Real counts are usually more spread out than that
+- Over-dispersion does not bias the coefficients much. It makes the standard errors too small
+- Negative binomial regression adds a parameter for the extra variance
+- Check: compare the mean and the variance of the outcome, overall and within groups
+
+# The model section
+
+## What goes in it
+
+1. The model, written as equations
+2. Every term defined, in words, with units
+3. Why this model: the outcome type, what EDA showed, what the question needs
+4. What else you considered, briefly
+5. How it was fitted, and where the diagnostics are
+
+## Common problems
+
+- An equation copied from somewhere, in notation that does not match the variables in the paper
+- "We used a linear regression model" and nothing else
+- A model in the text that is not the model in the code
+- Justification that is a list of the software's features
+- Results in the model section, or the model in the results section
+
+# References

@@ -18,13 +18,10 @@ format:
 - Classic paper 4: Wickham (2014), "Tidy Data"
 - Lecture: cleaning and testing; storing and sharing
 - Lecture: data organization, documentation, and style, following Lewis
-- Demonstration: clean what the API gave us last week, with the tests written first; a data dictionary and the first page of a datasheet
-- Team time for Assignment II
+
 
 ::: {.notes}
-- Last week ended with 500 rows from the Open Data Toronto API in which every column, including the counts, was a character. We had the data. We did not have a dataset. This week is about getting from one to the other in a way that someone else can check, and then handing it over so that someone else can use it.
-- The readings are Chapters 9 and 10 of @Alexander2023; Chapters 3, 4, 5, and 9 of @Lewis2024; @Gebru2021; @Wilkinson2016; the Quartz guide to bad data [@QuartzBadData]; and @Wickham2014.
-- There are two decks today. This one follows the two chapters of @Alexander2023. The second is drawn from @Lewis2024.
+- 
 :::
 
 # Clean and prepare

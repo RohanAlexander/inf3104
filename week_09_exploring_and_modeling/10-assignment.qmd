@@ -1,0 +1,39 @@
+---
+title: "Assignment 3: The Final paper"
+author: "Rohan Alexander"
+date: "2026-11-13"
+date-format: "D MMMM, YYYY"
+format: pdf
+bibliography: references.bib
+---
+
+Due: EOD Wednesday 2 December. Work individually. Submit a link to your GitHub repo via Quercus, and do not modify the repo after the due date. Exam 3 on Friday 4 December includes one section about your own paper.
+
+# What you will do
+
+Assignment 3 is the Final paper from @Alexander2023.
+
+<https://tellingstorieswithdata.com/25-papers.html#sec-final-paper>
+
+Working in an entirely reproducible way, develop a research question that is of interest to you, obtain or create a relevant dataset, and write a paper that uses a model to answer the question. The task, checks, FAQ, rubric, and examples are in the book, and the rubric there is the one that will be used. You are welcome to use R, Python, or a combination.
+
+This paper is where the three Parts meet.
+
+- From Part 1 it needs the workflow, the repo, the graphs and tables, and the writing.
+- From Part 2 it needs the data section, which says what was measured and how, who could have been in the data, who was, and what that means for what you can claim. The paper also needs an appendix that goes into depth on some aspect of surveys, sampling, or observational data that is related to your paper. If you did the Howrah paper then you know what this looks like. It might include simulation, links to the literature, or an idealized methodology.
+- From Part 3 it needs exploratory data analysis that changes what you do, and a model that you simulated before you fitted, and that you write down and justify. The results are reported as quantities that a reader can understand, as well as a table of coefficients.
+
+# Advice
+
+- You are welcome to build on the dataset that you used in Assignment 1 or created in Assignment 2, but it is not required, and the paper must be new.
+- Do not use a dataset from Kaggle, UCI, or similar. The book explains why.
+- Start small. One outcome, and one or two predictors. Get that working from raw data through to a rendered PDF, and only then add to it. Every predictor, and the outcome, needs to be graphed and explained in the data section.
+- You can use any model, but you have to be able to explain it, and that is harder than fitting it.
+- The EDA worksheet ends with three things that you learned from EDA that change your plan. The models worksheet is practice at writing a model section, and the results worksheet at writing a results section. Use them on your own paper.
+- Class time in Weeks 10 and 11 is set aside for this paper. Aim to have your model written down, simulated, and fitted by the end of Week 10, and a draft that renders by the end of Week 11. The Week 9 folder has a draft swap sheet to use with someone else in the class before you submit.
+
+# The exam
+
+One section of Exam 3 is about your own paper. For instance, I may ask you to interpret one of your estimates for a particular kind of person, to say what would change under a different model, or to defend a decision that you made while cleaning.
+
+# References

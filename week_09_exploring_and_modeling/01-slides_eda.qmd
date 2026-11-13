@@ -1,0 +1,309 @@
+---
+title: "Exploratory data analysis"
+author: "Rohan Alexander"
+date: "2026-11-13"
+date-format: "D MMMM, YYYY"
+bibliography: references.bib
+format:
+  revealjs:
+    slide-number: "c/t"
+    show-slide-number: all
+---
+
+# What EDA is for
+
+> The future of data analysis can involve great progress, the overcoming of real difficulties, and the provision of a great service to all fields of science and technology. Will it? That remains to us, to our willingness to take up the rocky road of real problems in preference to the smooth road of unreal assumptions, arbitrary criteria, and abstract results without real attachments. Who is for the challenge?
+>
+> @tukey1962 [p. 64]
+
+
+## What it is
+
+- Coming to terms with a new dataset
+- By looking at it, with graphs, tables, summary statistics, even models
+- Unstructured, iterative, quick
+- Never finished
+
+
+## Three things we want to understand
+
+1. Each variable by itself
+2. Each variable in the context of the others
+3. The data that are not there
+
+
+
+## EDA is about the change you see in yourself
+
+- Not a section that you fill in
+- You planned a model in your head. After EDA, is it still the right one?
+    - the outcome is a count with a long tail rather than a continuous measure
+    - the rows are the same units, repeated night after night
+    - a predictor is missing for exactly the group you care about
+- If nothing changed, you probably did not look hard enough
+
+
+## It's a means to an end
+
+- Make a separate Quarto document
+- Add code and brief notes as you go
+- Add rather than delete
+- It informs the whole paper, especially the data section, but mostly does not appear in it
+
+# Two classics
+
+## Anscombe (1973)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 5
+
+library(tidyverse)
+
+tidy_anscombe <-
+  anscombe |>
+  pivot_longer(
+    everything(),
+    names_to = c(".value", "set"),
+    names_pattern = "(.)(.)"
+  )
+
+tidy_anscombe |>
+  ggplot(aes(x = x, y = y)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, colour = "grey50", linewidth = 0.5) +
+  facet_wrap(vars(set), nrow = 1, labeller = label_both) +
+  theme_classic(base_size = 16)
+```
+
+::: {.notes}
+- These are the four datasets from @Anscombe1973, which we first saw in Week 2. They are built into R as `anscombe`.
+- Each has eleven points. The fitted line in each panel is the least-squares line, and it is the same line in all four.
+:::
+
+## Anscombe (1973)
+
+```{r}
+#| echo: false
+
+tidy_anscombe |>
+  summarise(
+    `Mean of x` = mean(x),
+    `Mean of y` = mean(y),
+    `SD of x` = sd(x),
+    `SD of y` = sd(y),
+    Correlation = cor(x, y),
+    .by = set
+  ) |>
+  rename(Set = set) |>
+  knitr::kable(digits = 2)
+```
+
+- Same means, same standard deviations, same correlation, same regression line
+- One is a line with noise. One is a curve. One is a line with one bad point. One is a single point doing all the work.
+
+
+## Tukey (1977)
+
+- Exploratory and confirmatory analysis are different jobs
+- Exploratory comes first, and asks what the data seem to say
+- Simple tools, used by hand: stem-and-leaf displays, five-number summaries, boxplots, re-expression, residuals
+- Look at what is left over after you have described the pattern
+
+
+# Each variable by itself
+
+## Look at the data
+
+- `head()` and `tail()`
+- Then a random selection: `slice_sample()`
+- Then the variables and their classes: `glimpse()`
+- What is a row?
+
+
+## Is each variable what it says it is?
+
+- Class: is the date a date? Is the identifier a character?
+- Values: `unique()`, `count()`, `table()`
+- The subway line variable in the TTC delay data had values "YU", "BD", "YU/BD", "YUS", "999", "36 FINCH WEST", ...
+- Note it, make a provisional decision, keep going
+- Ask yourself: "How is the lying liar lying to me?"
+
+
+## Summary statistics, and their limits {.smaller}
+
+- `summary()`: minimum, median, mean, maximum, number of observations
+- Then remove some observations at random and compare
+
+| Seed | Mean | Ignored states |
+|--:|---:|:----------------------------------------|
+| 1 | 4,469 | Arkansas, Rhode Island, Alabama, North Dakota, Minnesota |
+| 2 | 4,027 | Massachusetts, Iowa, Colorado, West Virginia, New York |
+| 3 | 4,086 | California, Idaho, Rhode Island, Oklahoma, South Carolina |
+
+## Distributions
+
+- Histograms first, for everything numeric
+- Change the bin width and look again
+- A mostly empty graph means a long tail, so try a log scale
+- Look for bunching, such as ages ending in 0 and 5, or prices ending in 9
+
+## Outliers
+
+- A small number of values a long way from the rest
+- First, find out what they are. Go and look at the rows
+- An error, or a real and unusual observation?
+- Do not delete silently. If you remove them, say so, and show what changes
+
+## Duplicates and dates
+
+- `janitor::get_dupes()`
+- Is a duplicate an error, or two events that look the same?
+- Dates: graph a count against the date
+    - gaps, spikes, a change in level on 1 January
+
+# Each variable in the context of the others
+
+## Groups
+
+- Color or facet by a categorical variable
+- Compare shapes with densities, but check the counts
+- Small groups will heavily influence, or wreck, a model
+
+## Two variables at a time
+
+- Two continuous variables: a scatterplot, which is a good precursor to modeling
+- A continuous and a categorical variable: boxplots, or facets
+- Two categorical variables: a table of counts
+- With many points of the same unit, sample one per unit first
+
+## Models are EDA tools too
+
+- `lm()` and `glm()` are quick. Use them to look rather than to conclude
+- Fit the simple version, then look at what is left over
+- This is not the model in your paper
+
+# The data that are not there
+
+## Known missing values
+
+- Count the `NA`s in each variable: `naniar::miss_var_summary()`
+- Look at the pattern: `naniar::vis_miss()`
+- Then ask why each is missing
+- There are always missing data of some sort
+
+## Missing values in disguise
+
+- `-99`, `999`, `9999999`
+- `""`, `"N/A"`, `"Unknown"`, `"Prefer not to say"`
+- An "NA" that is a category and not an `NA`
+- A zero that means "not recorded"
+
+## Three kinds of missingness
+
+- Missing Completely At Random (MCAR): unrelated to any variable, observed or not
+- Missing At Random (MAR): related to other variables in the dataset
+- Missing Not At Random (MNAR): related to unobserved variables, or to the missing value itself
+
+
+## What to do
+
+| Observation | Drop missing | Impute mean | Multiple imputation | Actual |
+|:---|---:|---:|---:|---:|
+| Florida | | 4,308 | 11,197 | 8,277 |
+| Montana | | 4,308 | 4,589 | 746 |
+| New Hampshire | | 4,308 | 813 | 812 |
+| Overall mean | 4,308 | 4,308 | 4,382 | 4,246 |
+
+## Nothing makes up for missing data
+
+- The conditions under which imputation is justified are not common, and we can rarely verify them
+- What we can do is simulate
+    - take the data that you have
+    - remove some, in a way that mimics what you fear
+    - apply your approach and see how wrong it is
+- Then document what you did, and show the effect of other choices
+
+
+## Rows that never existed
+
+- `is.na()` finds holes in the table. It does not find missing rows
+- Who, or what, could not have been in this dataset?
+    - the survey non-respondents
+    - the shelter program that was closed that night
+    - the delay that nobody logged
+
+
+
+# Writing it down
+
+## The decisions log {.smaller}
+
+| # | What we saw | What we decided |
+|-:|:-------------------------|:-------------------------|
+| 1 | Date stored as text | Convert; none lost in conversion |
+| 2 | Variance of the count is more than 80 times its mean | Negative binomial rather than Poisson |
+| 3 | Bed and room variables are `NA` by design | Combine into one; never `drop_na()` the table |
+| 4 | Address missing for nine programs, none for Families or Men | Do not model location |
+
+
+## Why write it down
+
+- You will forget
+- The modeling decisions depend on these, and the model section has to justify them
+- A reader can only trust a decision that they can see
+- Many small, reasonable, unrecorded choices add up to a result that nobody can reproduce, including you
+
+## Appendices are your friends, as are GitHub repos
+
+- **Data section**: what a row is; where the data came from; the variables that you use, each graphed or tabled; what is missing and what you did about it
+- **Appendix**: the sensitivity checks, with and without
+- **Model section**: choices that EDA forced
+- **Not in the paper**: the other forty graphs
+
+
+# What a model is for
+
+## Not the truth
+
+- A model is not, and cannot be, a true representation of reality
+- We use it to explore and understand the data that we have
+- And, we hope, something about the world that produced them
+- There is no best model. There are useful ones
+
+
+## Two worlds
+
+- The world of the model, and the world that we want to talk about
+- To what extent does the model teach us about the data that we have?
+- To what extent do the data that we have reflect the world?
+- The second question is Part 2 of this course
+
+
+## To explain or to predict?
+
+- @Shmueli2010: explanation, prediction, and description are different uses of a statistical model
+- Many fields model almost only to explain, and assume that a model that explains well will predict well
+- It need not. And the reverse need not hold either
+- The goal changes what you do at every step
+
+## Two cultures
+
+- @Breiman2001: two approaches to learning from data
+- Data modeling: assume a stochastic model for how the data arose; estimate its parameters; interpret them
+- Algorithmic modeling: treat the mechanism as unknown; find a function that predicts well; judge it by predictive accuracy
+- In 2001, statistics was almost entirely the first. Breiman thought that was a mistake
+
+
+## Where we sit
+
+- Inference and description, with small models that we can write down
+- Outcome and predictor rather than dependent and independent variable
+- `lm()` and `glm()` to move quickly; `rstanarm` when it goes in the paper
+- Plan, simulate, acquire, explore, share
+
+
+# References
